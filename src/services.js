@@ -1,11 +1,5 @@
 import axios from "axios";
 
-const sortArtists = (topArtists) => {
-  topArtists.sort(
-    (a, b) => parseFloat(a.popularity) - parseFloat(b.popularity)
-  );
-};
-
 export const getTopArtists = async (accessToken) => {
   try {
     const response = await axios.get(
@@ -20,47 +14,64 @@ export const getTopArtists = async (accessToken) => {
         },
       }
     );
+
     const topArtists = response.data.items;
-    sortArtists(topArtists);
+    sortArtistsByUniqueness(topArtists);
+
     return topArtists;
   } catch (error) {
     throw error;
   }
 };
 
-export const groupArtists = (artists) => {
+const sortArtistsByUniqueness = (topArtists) => {
+  topArtists.sort(
+    (a, b) => parseFloat(a.popularity) - parseFloat(b.popularity)
+  );
+};
+
+export const rankArtists = (artists) => {
   const ranking = {
-    extremelyUnique: [],
-    veryUnique: [],
-    somewhatUnique: [],
-    popular: [],
+    red: {
+      artists: [],
+      percentage: null,
+    },
+    orange: {
+      artists: [],
+      percentage: null,
+    },
+    yellow: {
+      artists: [],
+      percentage: null,
+    },
+    green: {
+      artists: [],
+      percentage: null,
+    },
   };
 
   artists.map((artist) => {
     if (artist.popularity <= 25) {
-      ranking.extremelyUnique.push(artist);
+      ranking.red.artists.push(artist);
     } else if (artist.popularity > 25 && artist.popularity <= 50) {
-      ranking.veryUnique.push(artist);
+      ranking.orange.artists.push(artist);
     } else if (artist.popularity > 50 && artist.popularity <= 75) {
-      ranking.somewhatUnique.push(artist);
+      ranking.yellow.artists.push(artist);
     } else {
-      ranking.popular.push(artist);
+      ranking.green.artists.push(artist);
     }
   });
+
+  ranking.red.percentage = Math.floor((ranking.red.artists.length / 50) * 100);
+  ranking.orange.percentage = Math.floor(
+    (ranking.orange.artists.length / 50) * 100
+  );
+  ranking.yellow.percentage = Math.floor(
+    (ranking.yellow.artists.length / 50) * 100
+  );
+  ranking.green.percentage = Math.floor(
+    (ranking.green.artists.length / 50) * 100
+  );
+
   return ranking;
-};
-
-export const getPercentages = (ranking) => {
-  
-  const extremelyUniquePercent = Math.floor((ranking.extremelyUnique.length / 50) * 100)
-  const veryUniquePercent = Math.floor((ranking.veryUnique.length / 50) * 100)
-  const somewhatUniquePercent = Math.floor((ranking.somewhatUnique.length / 50) * 100)
-  const popularPercent = Math.floor((ranking.popular.length / 50) * 100)
-  return {
-    extremelyUniquePercent,
-    veryUniquePercent,
-    somewhatUniquePercent,
-    popularPercent,
-  };
-
 };
