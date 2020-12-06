@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import Scale from "./components/Scale/Scale";
 
 import "./App.css";
-import { getTopArtists, getPercentages, groupArtists } from "./services";
+import { getTopArtists, rankArtists } from "./services";
 
 import queryString from "query-string";
 
 function App() {
   const [artists, setArtists] = useState([]);
+  
   const string = queryString.parse(window.location.search);
   const accessToken = string.access_token;
 
@@ -18,24 +20,17 @@ function App() {
     apiCall();
   }, []);
 
-  // determine "uniqueness" avg of artists
-
-  // group artists by popularity in quarter increments
-  const ranking = groupArtists(artists);
-
-  // // assign percentage to each grouping
-  console.log(getPercentages(ranking));
-
-  // // generate dichromatic scale based on percentages
-
-  // // hover over grouping displays artists in group
-
-  // // // deep cuts playlist
-
+  const ranking = rankArtists(artists);
 
   return accessToken ? (
     <div className="App">
-      <h1>Hello</h1>
+      <h1>niche</h1>
+
+      <Scale
+        red={ranking.red.percentage}
+        orange={ranking.red.percentage + ranking.orange.percentage}
+        yellow={ranking.orange.percentage + ranking.yellow.percentage}
+      />
     </div>
   ) : (
     // Login component here
