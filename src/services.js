@@ -46,7 +46,7 @@ export const rankArtists = (artists) => {
     },
     green: {
       artists: [],
-      percentage: null,
+      percentage: 100,
     },
   };
 
@@ -69,9 +69,6 @@ export const rankArtists = (artists) => {
   ranking.yellow.percentage = Math.floor(
     (ranking.yellow.artists.length / 50) * 100
   );
-  ranking.green.percentage = Math.floor(
-    (ranking.green.artists.length / 50) * 100
-  );
-
+  
   return ranking;
 };
