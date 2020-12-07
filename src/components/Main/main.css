@@ -1,7 +1,9 @@
 main {
 height: 100%;
-padding: 5vh 15vw;
+padding: 2vh 10vw;
 font-family: 'Comfortaa';
+color: white;
+background-color: black;
 }
 
 main label {
@@ -18,12 +20,12 @@ main h5 {
 
 #obscure {
   color: #F9564F;
-  text-shadow: 1px 0.5px orange;
+  text-shadow: 0.5px 0.5px orange;
 }
 
 #popular {
   color: rgba(32, 136, 32, 0.856);
-  text-shadow: 1px 0.5px yellow;
+  text-shadow: 0.5px 0.5px yellow;
 }
 
 .artistGrid {
@@ -34,7 +36,6 @@ main h5 {
   margin-top: 50px;
 }
 
-p {
-  margin-right: 20px;
-  transform: 0.5s ease-in-out;
+main p {
+  margin: 5px;
 }
