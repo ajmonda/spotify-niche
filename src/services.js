@@ -75,24 +75,3 @@ export const rankArtists = (artists) => {
 
   return ranking;
 };
-
-export const sliderStyle = {
-  railStyle={{
-  height: 50,
-  borderRadius: 0,
-  background: `-moz-linear-gradient(90deg, ${gradient}`,
-  background: `-webkit-linear-gradient(360deg, ${gradient}`,
-  background: `linear-gradient(90deg, ${gradient}`,
-}},
-handleStyle={{
-  height: 50,
-  width: 10,
-  borderRadius: 0,
-  marginTop: 0,
-  backgroundColor: "black",
-  border: 0,
-}},
-trackStyle={{
-  background: "none",
-}}
-}
