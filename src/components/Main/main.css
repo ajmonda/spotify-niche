@@ -1,11 +1,29 @@
 main {
-width: 80%;
+height: 100%;
+padding: 5vh 15vw;
+font-family: 'Comfortaa';
 }
 
-.label {
+main label {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-content: center;
+}
+main h5 {
+  margin: 0;
+  font-size: 15px;
+  text-shadow: 0.5px 0.5px black;
+}
+
+#obscure {
+  color: #F9564F;
+  text-shadow: 1px 0.5px orange;
+}
+
+#popular {
+  color: rgba(32, 136, 32, 0.856);
+  text-shadow: 1px 0.5px yellow;
 }
 
 .artistGrid {
@@ -13,7 +31,7 @@ width: 80%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 p {
