@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from './Header/Header'
 import Slider from "rc-slider";
 
 import { rankArtists } from "../../services.js";
@@ -45,12 +46,13 @@ export default function Main(props) {
 
   return (
     <main>
-      <h2>Your listening habitd over the past month have been 72% niche.</h2>
+      <Header />
+
       <div>
-        <div className="label">
-          <h5>Obscure</h5>
-          <h5>Popular</h5>
-        </div>
+        <label>
+          <h5 id="obscure">Obscure</h5>
+          <h5 id="popular">Popular</h5>
+        </label>
         <Slider
           min={0}
           max={100}
@@ -58,6 +60,7 @@ export default function Main(props) {
           onChange={onSliderChange}
           railStyle={{
             height: 50,
+            border: '1px solid black',
             borderRadius: 0,
             background: `-moz-linear-gradient(90deg, ${gradient}`,
             background: `-webkit-linear-gradient(360deg, ${gradient}`,
