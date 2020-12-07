@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from './Header/Header'
 import Slider from "rc-slider";
 
-import { rankArtists } from "../../services.js";
+import { rankArtists, getTopGenres } from "../../services.js";
 
 import "./main.css";
 import "rc-slider/assets/index.css";
@@ -12,6 +12,12 @@ export default function Main(props) {
   const [sliderValue, setSliderValue] = useState(2);
 
   const { red, orange, yellow, green } = rankArtists(props.artists);
+  const genres = getTopGenres(props.artists).slice(0, 10).sort()
+  
+  genres.map((genre) => {
+   console.log(genre)
+ })
+
 
   const positions = {
     red: red.percentage,
