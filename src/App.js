@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Scale from "./components/Scale/Scale";
+import Main from "./components/Main/Main";
 
 import "./App.css";
 import { getTopArtists, rankArtists } from "./services";
@@ -20,19 +20,12 @@ function App() {
     apiCall();
   }, []);
 
-  const { red, orange, yellow, green } = rankArtists(artists);
 
   return accessToken ? (
     <div className="App">
       <h1>niche</h1>
-
-      <Scale
-        red={red.percentage}
-        orange={red.percentage + orange.percentage}
-        yellow={orange.percentage + yellow.percentage}
-      />
+      <Main artists={artists} />
     </div>
-    
   ) : (
     // Login component here
     <button>Login</button>

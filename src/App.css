@@ -1,6 +1,6 @@
 .App {
-  width: 100vw;
   display: flex;
+  padding: 50px;
   flex-direction: column;
   text-align: center;
   align-items: center;

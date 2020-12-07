@@ -1,0 +1,25 @@
+main {
+  width: 100%;
+}
+.label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.artistGrid {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 100px;
+}
+
+p {
+  margin-right: 20px;
+  transform: 0.5s ease-in-out;
+}
+
+/* .rc-slider-step {
+  height: 30vh;
+} */
