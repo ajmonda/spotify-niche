@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Header from './Header/Header'
+import Header from "./Header/Header";
+import Genres from "./Genres/Genres";
 import Slider from "rc-slider";
 
-import { rankArtists } from "../../services.js";
+import { rankArtists, getTopGenres } from "../../services.js";
 
 import "./main.css";
 import "rc-slider/assets/index.css";
@@ -12,6 +13,7 @@ export default function Main(props) {
   const [sliderValue, setSliderValue] = useState(2);
 
   const { red, orange, yellow, green } = rankArtists(props.artists);
+  const genres = getTopGenres(props.artists).slice(0, 30).sort();
 
   const positions = {
     red: red.percentage,
@@ -47,6 +49,7 @@ export default function Main(props) {
   return (
     <main>
       <Header />
+      <Genres genres={genres} />
 
       <div>
         <label>
@@ -60,7 +63,7 @@ export default function Main(props) {
           onChange={onSliderChange}
           railStyle={{
             height: 50,
-            border: '1px solid black',
+            border: "1px solid white",
             borderRadius: 0,
             background: `-moz-linear-gradient(90deg, ${gradient}`,
             background: `-webkit-linear-gradient(360deg, ${gradient}`,
@@ -71,8 +74,10 @@ export default function Main(props) {
             width: 10,
             borderRadius: 0,
             marginTop: 0,
-            backgroundColor: "black",
+            backgroundColor: "white",
             border: 0,
+            borderLeft: "1px solid black",
+            borderRight: "1px solid black",
           }}
           trackStyle={{
             background: "none",
@@ -81,17 +86,25 @@ export default function Main(props) {
       </div>
 
       <div className="artistGrid">
-        {displayedArtists
-          ? displayedArtists.artists.map((artist) => {
-              return (
-                <>
-                  <p style={{
-                    backgroundColor: `${displayedArtists}`
-                  }}>{artist.name}</p>
-                </>
-              );
-            })
-          : <p>Move the slider to explore your top artists.</p>}
+        {displayedArtists ? (
+          displayedArtists.artists.map((artist) => {
+            return (
+              <>
+                <p
+                  style={{
+                    color: "#2FBF71",
+                  }}
+                >
+                  {artist.name}
+                </p>
+              </>
+            );
+          })
+        ) : (
+          <p style={{ fontWeight: "bold" }}>
+            Move the slider to explore your top artists.
+          </p>
+        )}
       </div>
     </main>
   );

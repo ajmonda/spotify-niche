@@ -1,0 +1,29 @@
+.genres {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.genres h3 {
+  color: #F4C87B;
+}
+
+.genres p {
+
+  margin: 1px;
+  margin-right: 5px;
+  line-height: 0.95;
+  padding: 0;
+}
+
+.genreList {
+  margin-left: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
