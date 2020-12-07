@@ -1,6 +1,7 @@
 main {
-  width: 100%;
+width: 80%;
 }
+
 .label {
   display: flex;
   flex-direction: row;
@@ -19,7 +20,3 @@ p {
   margin-right: 20px;
   transform: 0.5s ease-in-out;
 }
-
-/* .rc-slider-step {
-  height: 30vh;
-} */

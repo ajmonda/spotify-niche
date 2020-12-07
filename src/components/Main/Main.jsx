@@ -8,7 +8,7 @@ import "rc-slider/assets/index.css";
 
 export default function Main(props) {
   const [displayedArtists, setDisplayedArtists] = useState(null);
-  const [sliderValue, setSliderValue] = useState(50);
+  const [sliderValue, setSliderValue] = useState(2);
 
   const { red, orange, yellow, green } = rankArtists(props.artists);
 
@@ -45,6 +45,7 @@ export default function Main(props) {
 
   return (
     <main>
+      <h2>Your listening habitd over the past month have been 72% niche.</h2>
       <div>
         <div className="label">
           <h5>Obscure</h5>
@@ -85,7 +86,7 @@ export default function Main(props) {
                 </>
               );
             })
-          : null}
+          : <p>Move the slider to explore your top artists.</p>}
       </div>
     </main>
   );

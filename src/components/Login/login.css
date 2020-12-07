@@ -2,32 +2,44 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
 
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  background-color: black;
+}
 .login {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
+  background-color: black;
+  padding: 30px;
+  height: 70vh;
+  width: 100vw;
+  /* border-top: 50px solid #F3C677;
+  border-bottom: 50px solid #B33F62; */
 }
 .login h1 {
   margin-top: 0;
   font-size: 50px;
   font-family: "Comfortaa";
   color: #719d58;
-  color: #f5dd90;
+  color: white;
 }
 
 span {
   align-self: baseline;
   font-size: 60px;
-  color: #f68e5f;
+  color: #F9564F;
 }
 
 .loginButton {
   display: flex;
   flex-direction: column;
   align-self: center;
-  width: 70%;
+  width: 300px;
 }
 
 .login button {
