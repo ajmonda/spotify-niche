@@ -85,7 +85,9 @@ export default function Main(props) {
           ? displayedArtists.artists.map((artist) => {
               return (
                 <>
-                  <p>{artist.name}</p>
+                  <p style={{
+                    backgroundColor: `${displayedArtists}`
+                  }}>{artist.name}</p>
                 </>
               );
             })
