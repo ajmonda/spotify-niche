@@ -21,7 +21,7 @@ export default function Main(props) {
 
   const onSliderChange = (value) => {
     setSliderValue(value);
-    console.log(sliderValue);
+
     if (sliderValue <= positions.red) {
       setDisplayedArtists(red);
     } else if (sliderValue <= positions.orange && sliderValue > positions.red) {
@@ -34,6 +34,7 @@ export default function Main(props) {
     } else if (sliderValue <= positions.green) {
       setDisplayedArtists(green);
     }
+
     console.log(displayedArtists);
   };
 
@@ -45,45 +46,47 @@ export default function Main(props) {
   return (
     <main>
       <div>
-
         <div className="label">
-          <h5>Unique</h5>
+          <h5>Obscure</h5>
           <h5>Popular</h5>
         </div>
-      <Slider
-        min={0}
-        max={100}
-        value={sliderValue}
-        onChange={onSliderChange}
-        railStyle={{
-          height: 50,
-          borderRadius: 0,
-          background: `-moz-linear-gradient(90deg, ${gradient}`,
-          background: `-webkit-linear-gradient(360deg, ${gradient}`,
-          background: `linear-gradient(90deg, ${gradient}`,
-        }}
-        handleStyle={{
-          height: 50,
-          width: 10,
-          borderRadius: 0,
-          marginTop: 0,
-          backgroundColor: "black",
-          border: 0,
-        }}
-        trackStyle={{
-          background: "none",
-        }}
+        <Slider
+          min={0}
+          max={100}
+          value={sliderValue}
+          onChange={onSliderChange}
+          railStyle={{
+            height: 50,
+            borderRadius: 0,
+            background: `-moz-linear-gradient(90deg, ${gradient}`,
+            background: `-webkit-linear-gradient(360deg, ${gradient}`,
+            background: `linear-gradient(90deg, ${gradient}`,
+          }}
+          handleStyle={{
+            height: 50,
+            width: 10,
+            borderRadius: 0,
+            marginTop: 0,
+            backgroundColor: "black",
+            border: 0,
+          }}
+          trackStyle={{
+            background: "none",
+          }}
         />
       </div>
 
       <div className="artistGrid">
         {displayedArtists
           ? displayedArtists.artists.map((artist) => {
-              return <p>{artist.name}</p>;
+              return (
+                <>
+                  <p>{artist.name}</p>
+                </>
+              );
             })
           : null}
       </div>
-
     </main>
   );
 }
