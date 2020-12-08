@@ -10,97 +10,108 @@ import "rc-slider/assets/index.css";
 
 export default function Main(props) {
   const [displayedArtists, setDisplayedArtists] = useState(null);
-  const [sliderValue, setSliderValue] = useState(2);
+  const [sliderValue, setSliderValue] = useState(50);
 
-  const { red, orange, yellow, green } = rankArtists(props.artists);
+  const { red, orange, yellow, green, obscurityRating } = rankArtists(
+    props.artists
+  );
   const genres = getTopGenres(props.artists).slice(0, 30).sort();
 
   const positions = {
-    red: red.percentage,
-    orange: orange.percentage + red.percentage,
-    yellow: yellow.percentage + orange.percentage + red.percentage,
-    green: 100,
+    green: 0,
+    yellow: green.percentage,
+    orange: yellow.percentage,
+    red: 100,
   };
+
+  // console.log(obscurityRating);
 
   const onSliderChange = (value) => {
     setSliderValue(value);
+    console.log(sliderValue);
 
-    if (sliderValue <= positions.red) {
-      setDisplayedArtists(red);
-    } else if (sliderValue <= positions.orange && sliderValue > positions.red) {
-      setDisplayedArtists(orange);
+    if (sliderValue < positions.yellow) {
+      setDisplayedArtists(green);
     } else if (
-      sliderValue <= positions.yellow &&
-      sliderValue > positions.orange
+      sliderValue >= positions.yellow &&
+      sliderValue < positions.orange
     ) {
       setDisplayedArtists(yellow);
-    } else if (sliderValue <= positions.green) {
-      setDisplayedArtists(green);
+    } else if (
+      sliderValue >= positions.orange &&
+      sliderValue < Math.floor(100 - red.percentage)
+    ) {
+      setDisplayedArtists(orange);
+    } else if (sliderValue > Math.floor(100 - red.percentage)) {
+      setDisplayedArtists(red);
     }
-
-    console.log(displayedArtists);
   };
 
-  const gradient = `red ${positions.red}%,
-    orange ${positions.orange}%,
-    yellow ${positions.yellow}%,
-    green 100%)`;
+  const gradient = `#3DDC97 ${positions.green}%,
+    #FFBF00 ${positions.yellow}%,
+    #FF842E ${positions.orange}%,
+    #FF495C 100%`;
 
   return (
     <main>
-      <Header />
+      <Header obscurityRating={obscurityRating} />
       <Genres genres={genres} />
 
       <div>
-        <label>
-          <h5 id="obscure">Obscure</h5>
-          <h5 id="popular">Popular</h5>
-        </label>
         <Slider
-          min={0}
+          min={1}
           max={100}
           value={sliderValue}
           onChange={onSliderChange}
           railStyle={{
             height: 50,
-            border: "1px solid white",
+            border: "2px solid white",
             borderRadius: 0,
-            background: `-moz-linear-gradient(90deg, ${gradient}`,
-            background: `-webkit-linear-gradient(360deg, ${gradient}`,
-            background: `linear-gradient(90deg, ${gradient}`,
+            background: `-moz-linear-gradient(90deg, ${gradient})`,
+            background: `-webkit-linear-gradient(360deg, ${gradient})`,
+            background: `linear-gradient(90deg, ${gradient})`,
           }}
           handleStyle={{
-            height: 50,
+            height: 48,
             width: 10,
-            borderRadius: 0,
-            marginTop: 0,
+            borderRadius: 5,
+            marginTop: 1,
             backgroundColor: "white",
-            border: 0,
-            borderLeft: "1px solid black",
-            borderRight: "1px solid black",
+            border: "1px solid black",
+            // borderRight: "1px solid black",
           }}
           trackStyle={{
             background: "none",
           }}
         />
+        <label>
+          <h5 id="popular">Popular</h5>
+          <h5 id="obscure">Obscure</h5>
+        </label>
       </div>
 
       <div className="artistGrid">
         {displayedArtists ? (
-          
           displayedArtists.artists.map((artist) => {
             return (
               <>
-                <p>
+                <p
+                  style={{
+                    color: displayedArtists.color
+                  }}
+                >
                   {artist.name}
                 </p>
               </>
             );
           })
         ) : (
-            <p style={{
+          <p
+            style={{
               fontWeight: "bold",
-            color: "white" }}>
+              fontSize: "20px",
+            }}
+          >
             Move the slider to explore your top artists.
           </p>
         )}

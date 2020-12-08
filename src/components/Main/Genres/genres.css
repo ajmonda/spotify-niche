@@ -3,17 +3,18 @@
   flex-direction: row;
   width: 100%;
   flex-wrap: wrap;
-  margin: 20px 0;
+  margin-bottom: 30px;
   justify-content: center;
   align-items: center;
 }
 
 .genres h3 {
-  color: #F4C87B;
+  color: #C5C9E7;
 }
 
 .genres p {
-
+  font-family: 'Montserrat';
+  color: #E4C1F9;
   margin: 1px;
   margin-right: 5px;
   line-height: 0.95;

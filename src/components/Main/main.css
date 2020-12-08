@@ -8,39 +8,42 @@ background-color: black;
 }
 
 main label {
+  font-weight: bold;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
+  align-items: center;
+  margin-top: 41px;
+  padding: 5px 5px;
 }
 main h5 {
   margin: 0;
   font-size: 15px;
-  text-shadow: 0.5px 0.5px black;
-}
-
-#obscure {
-  color: #F9564F;
-  text-shadow: 0.5px 0.5px orange;
+  font-size: 12px;
 }
 
 #popular {
-  color: rgba(32, 136, 32, 0.856);
-  text-shadow: 0.5px 0.5px yellow;
+  color: #3DDC97;
+}
+#obscure {
+  color: #FF495C;
 }
 
+
 .artistGrid {
-  color: #C5C9E7;
-  margin-top: 50px;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  margin-top: 30px;
+  font-size: 17px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
 
 }
 
 main p {
-  font-weight: bold;
-  font-size: 18px;
-  margin: 10px;
+  margin: 5px 10px;
   flex-shrink: 5;
 }
