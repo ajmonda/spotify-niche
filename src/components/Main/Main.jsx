@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "./Header/Header";
 import Genres from "./Genres/Genres";
 import Slider from "rc-slider";
 
@@ -86,10 +85,11 @@ export default function Main(props) {
 
       <div className="artistGrid">
         {displayedArtists ? (
-          displayedArtists.artists.map((artist) => {
+          displayedArtists.artists.map((artist, i) => {
             return (
               <>
                 <p
+                  key={i}
                   style={{
                     color: displayedArtists.color,
                   }}

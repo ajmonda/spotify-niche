@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./header.css";
 
 export default function Header(props) {
-  const [timeSelectExpand, setTimeSelectExpand] = useState(false);
-  const { timeRange, obscurityRating, innerText, handleClick } = props;
+  const { obscurityRating, innerText, handleClick } = props;
 
   return (
     <header>
@@ -18,18 +17,13 @@ export default function Header(props) {
           {" "}
           {Math.floor(obscurityRating)}%
         </span>{" "}
-        obscure over the past{" "}
-        <div
-          className="timeWrapper">
-          {innerText},
-          <div className="timeSelect">
-            <a href={handleClick}
-              style={{
-              transform: timeSelectExpand === true ? 'translateY(0)' : null
-            }}>
-              {innerText === "four weeks" ? "six months" : "four weeks"}
-            </a>
-          </div>
+        obscure over the past <div className="timeWrapper"><span>{innerText}</span></div>
+        <div className="timeSelect">
+          <a
+            onClick={handleClick}
+          >
+            {innerText === "four weeks" ? "six months" : "four weeks"}
+          </a>
         </div>
       </h2>
     </header>

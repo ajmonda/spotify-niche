@@ -9,8 +9,12 @@ import { getTopArtists, rankArtists } from "./services";
 
 function App() {
   const [artists, setArtists] = useState([]);
+
+  const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([])
+  const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([])
+
   const [timeRange, setTimeRange] = useState("short_term");
-  const [innerText, setInnerText] = ["four weeks"]
+  const [innerText, setInnerText] = useState("four weeks");
 
   const { obscurityRating } = rankArtists(artists);
 
@@ -19,15 +23,30 @@ function App() {
 
   useEffect(() => {
     const apiCall = async () => {
-      const topArtists = await getTopArtists(accessToken, timeRange);
-      setArtists(topArtists);
+      const topArtistsShortTerm = await getTopArtists(accessToken, "short_term");
+      const topArtistsMediumTerm = await getTopArtists(accessToken, "medium_term");
+
+      setTopArtistsShortTerm(topArtistsShortTerm)
+      setTopArtistsMediumTerm(topArtistsMediumTerm)
+
+      setArtists(topArtistsShortTerm);
+
     };
     apiCall();
   }, []);
 
-  const handleClick = () => {
-    setTimeRange("medium_term");
-    window.location.reload(false);
+  const handleClick = (e) => {
+    e.preventDefault()
+    if (timeRange === "short_term") {
+      setTimeRange("medium_term");
+      setInnerText("six months");
+      setArtists(topArtistsMediumTerm)
+    } else {
+      setTimeRange("short_term");
+      setInnerText("four weeks");
+      setArtists(topArtistsShortTerm)
+    }
+
   };
 
   return (
