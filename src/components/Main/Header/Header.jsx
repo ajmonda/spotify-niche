@@ -17,7 +17,7 @@ export default function Header(props) {
           {" "}
           {Math.floor(obscurityRating)}%
         </span>{" "}
-        obscure over the past <div className="timeWrapper"><span>{innerText}</span></div>
+        obscure over the past <div className="timeWrapper">&rarr;<span>{innerText}</span>&larr;</div>
         <div className="timeSelect">
           <a
             onClick={handleClick}
