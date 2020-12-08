@@ -6,9 +6,10 @@ export default function Genres(props) {
   return (
     <div className="genres">
       <div className="genreList">
-        {props.genres.map((genre) => {
+        {props.genres.map((genre, i) => {
           return (
             <p
+              key={i}
               style={{
                 fontSize:
                   genre[1] > 3 ? `${genre[1] + 15}px` : `${genre[1] + 10}px`,

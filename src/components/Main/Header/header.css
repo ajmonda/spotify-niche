@@ -1,20 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 header {
   font-size: 20px;
-  font-family: 'Comfortaa';
+  font-family: "Comfortaa";
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-content: center;
-  padding: 0 50px;
-  color: #F4C87B;
+  flex-wrap: wrap;
+  padding: 0;
+  color: #f4c87b;
+  position: absolute;
+  padding: 0 20vw;
 }
-header a {
-  font-size: 30px;
-  border-radius: 5px;
-  color: #F9564F;
-  text-decoration-color: #F1B855;
+
+.timeWrapper span:hover {
+  text-decoration: none;
 }
+
+.timeWrapper span {
+  font-family: 'Montserrat';
+  color: #f9564f;
+  text-align: center;
+  margin: auto;
+  background-color: #f4c87b;
+  text-shadow: 1px 0.5px black;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
 header span {
   font-size: 30px;
+  align-self: center;
+}
+
+.timeSelect a:hover {
+  text-decoration: underline;
+  text-decoration-color: #F9564F;
+  cursor: pointer;
+  padding-top: 30px;
+  opacity: 1;
+}
+
+.timeSelect a {
+  font-family: 'Montserrat';
+  color: #f4c87b;
+  display: flex;
+  justify-content: center;
+  transform: translateY(-30px);
+  opacity: 0;
+  display: table;
+  transition: 0.2s ease-in-out;
+}
+
+h2 {
+  text-align: center;
+}
+a {
+  text-align: center;
+  margin: auto;
 }

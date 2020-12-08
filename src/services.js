@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getTopArtists = async (accessToken) => {
+export const getTopArtists = async (accessToken, timeRange) => {
   try {
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/artists`,
@@ -10,7 +10,7 @@ export const getTopArtists = async (accessToken) => {
         },
         params: {
           limit: "50",
-          time_range: "short_term",
+          time_range: timeRange,
         },
       }
     );

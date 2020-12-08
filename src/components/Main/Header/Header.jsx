@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./header.css";
 
 export default function Header(props) {
+  const { obscurityRating, innerText, handleClick } = props;
+
   return (
     <header>
-      <h2><span
+      <h2>
+        Your taste in music was
+        <span
           style={{
-            fontSize: "45px"
+            fontSize: "45px",
           }}
         >
-          {Math.floor(props.obscurityRating)}%
-        </span> of the music you listened to in the past <a href="#">month</a> was obscure.
+          {" "}
+          {Math.floor(obscurityRating)}%
+        </span>{" "}
+        obscure over the past <div className="timeWrapper"><span>{innerText}</span></div>
+        <div className="timeSelect">
+          <a
+            onClick={handleClick}
+          >
+            {innerText === "four weeks" ? "six months" : "four weeks"}
+          </a>
+        </div>
       </h2>
     </header>
   );

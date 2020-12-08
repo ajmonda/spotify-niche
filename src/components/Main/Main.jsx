@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "./Header/Header";
 import Genres from "./Genres/Genres";
 import Slider from "rc-slider";
 
@@ -12,7 +11,7 @@ export default function Main(props) {
   const [displayedArtists, setDisplayedArtists] = useState(null);
   const [sliderValue, setSliderValue] = useState(50);
 
-  const { red, orange, yellow, green, obscurityRating } = rankArtists(
+  const { red, orange, yellow, green} = rankArtists(
     props.artists
   );
   const genres = getTopGenres(props.artists).slice(0, 30).sort();
@@ -50,7 +49,6 @@ export default function Main(props) {
 
   return (
     <main>
-      <Header obscurityRating={obscurityRating} />
       <Genres genres={genres} />
 
       <div>
@@ -74,7 +72,6 @@ export default function Main(props) {
             marginTop: 1,
             backgroundColor: "white",
             border: "1px solid black",
-            // borderRight: "1px solid black",
           }}
           trackStyle={{
             background: "none",
@@ -88,10 +85,11 @@ export default function Main(props) {
 
       <div className="artistGrid">
         {displayedArtists ? (
-          displayedArtists.artists.map((artist) => {
+          displayedArtists.artists.map((artist, i) => {
             return (
               <>
                 <p
+                  key={i}
                   style={{
                     color: displayedArtists.color,
                   }}
