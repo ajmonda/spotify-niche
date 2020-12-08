@@ -15,7 +15,7 @@ main label {
 }
 main h5 {
   margin: 0;
-  font-size: 1.5vw;
+  font-size: 15px;
   text-shadow: 0.5px 0.5px black;
 }
 
@@ -40,7 +40,7 @@ main h5 {
 
 main p {
   font-weight: bold;
-  font-size: 1.8vw;
+  font-size: 18px;
   margin: 10px;
   flex-shrink: 5;
 }

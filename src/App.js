@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Header from "./components/Main/Header/Header";
+import Login from "./components/Login/Login";
 import Main from "./components/Main/Main";
 
 import "./App.css";
@@ -20,15 +22,18 @@ function App() {
     apiCall();
   }, []);
 
-
-  return accessToken ? (
+  return (
     <div className="App">
-      <h1>niche</h1>
-      <Main artists={artists} />
+      {accessToken ? (
+        <>
+          <Main artists={artists} />
+        </>
+      ) : (
+        <>
+          <Login />
+        </>
+      )}
     </div>
-  ) : (
-    // Login component here
-    <button>Login</button>
   );
 }
 

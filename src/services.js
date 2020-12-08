@@ -75,3 +75,20 @@ export const rankArtists = (artists) => {
 
   return ranking;
 };
+
+export const getTopGenres = (topArtists) => {
+  const genres = [];
+  topArtists.map((artist) => {
+    genres.push(...artist.genres)
+    return genres;
+  });
+  const genreFrequencies = {};
+  for (let i = 0; i < genres.length; i++) {
+    if (genreFrequencies[genres[i]]) {
+      genreFrequencies[genres[i]] += 1;
+    } else {
+      genreFrequencies[genres[i]] = 1;
+    }
+  }
+  return Object.entries(genreFrequencies).sort((a, b) => b[1] - a[1]);
+};
