@@ -1,6 +1,7 @@
 main {
-height: 100%;
-padding: 2vh 10vw;
+  overflow-wrap: inherit;
+height: 100vh;
+padding: 5vh 10vw;
 font-family: 'Comfortaa';
 color: white;
 background-color: black;
@@ -14,7 +15,7 @@ main label {
 }
 main h5 {
   margin: 0;
-  font-size: 15px;
+  font-size: 1.5vw;
   text-shadow: 0.5px 0.5px black;
 }
 
@@ -29,13 +30,17 @@ main h5 {
 }
 
 .artistGrid {
-  width: 100%;
+  color: #C5C9E7;
+  margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 50px;
+  justify-content: center;
+
 }
 
 main p {
-  margin: 5px;
+  font-weight: bold;
+  font-size: 1.8vw;
+  margin: 10px;
+  flex-shrink: 5;
 }

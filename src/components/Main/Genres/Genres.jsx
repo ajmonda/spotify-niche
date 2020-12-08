@@ -9,7 +9,7 @@ export default function Genres(props) {
         {props.genres.map((genre) => {
           console.log(genre[1]);
           return <p style={{
-            fontSize: genre[1] + 10,
+            fontSize: `${genre[1] + 10}px`,
             color: genre[1] >= 5 ? '#F9564F' : null,
           fontWeight: genre[1] >= 10 ? 'bold' : null}}>{genre[0]}</p>;
         })}
