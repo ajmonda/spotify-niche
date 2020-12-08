@@ -50,7 +50,7 @@ export default function Main(props) {
 
   return (
     <main>
-      <Header obscurityRating={obscurityRating} />
+      {/* <Header obscurityRating={obscurityRating} /> */}
       <Genres genres={genres} />
 
       <div>
@@ -74,7 +74,6 @@ export default function Main(props) {
             marginTop: 1,
             backgroundColor: "white",
             border: "1px solid black",
-            // borderRight: "1px solid black",
           }}
           trackStyle={{
             background: "none",

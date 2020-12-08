@@ -1,7 +1,7 @@
 main {
   overflow-wrap: inherit;
 height: 100vh;
-padding: 5vh 10vw;
+padding: 0;
 font-family: 'Comfortaa';
 color: white;
 background-color: black;
@@ -15,6 +15,7 @@ main label {
   align-items: center;
   margin-top: 41px;
   padding: 5px 5px;
+  padding-top: 0;
 }
 main h5 {
   margin: 0;
