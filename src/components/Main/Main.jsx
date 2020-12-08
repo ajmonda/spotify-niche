@@ -12,7 +12,7 @@ export default function Main(props) {
   const [displayedArtists, setDisplayedArtists] = useState(null);
   const [sliderValue, setSliderValue] = useState(50);
 
-  const { red, orange, yellow, green, obscurityRating } = rankArtists(
+  const { red, orange, yellow, green} = rankArtists(
     props.artists
   );
   const genres = getTopGenres(props.artists).slice(0, 30).sort();
@@ -50,7 +50,6 @@ export default function Main(props) {
 
   return (
     <main>
-      {/* <Header obscurityRating={obscurityRating} /> */}
       <Genres genres={genres} />
 
       <div>

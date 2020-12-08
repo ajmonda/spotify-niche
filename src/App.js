@@ -10,6 +10,7 @@ import { getTopArtists, rankArtists } from "./services";
 function App() {
   const [artists, setArtists] = useState([]);
   const [timeRange, setTimeRange] = useState("short_term");
+  const [innerText, setInnerText] = ["four weeks"]
 
   const { obscurityRating } = rankArtists(artists);
 
@@ -33,8 +34,13 @@ function App() {
     <div className="App">
       {accessToken ? (
         <>
-          <Header obscurityRating={obscurityRating} handleClick={handleClick} />
-          <Main artists={artists} getTopArtist={getTopArtists} />
+          <Header
+            timeRange={timeRange}
+            obscurityRating={obscurityRating}
+            innerText={innerText}
+            handleClick={handleClick}
+          />
+          <Main artists={artists} />
         </>
       ) : (
         <>
