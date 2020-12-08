@@ -7,11 +7,9 @@
   justify-content: center;
   align-items: center;
 }
-
 .genres h3 {
   color: #C5C9E7;
 }
-
 .genres p {
   font-family: 'Montserrat';
   color: #E4C1F9;
@@ -20,7 +18,6 @@
   line-height: 0.95;
   padding: 0;
 }
-
 .genreList {
   margin-left: 10px;
   width: 100%;

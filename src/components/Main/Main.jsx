@@ -24,25 +24,21 @@ export default function Main(props) {
     red: 100,
   };
 
-  // console.log(obscurityRating);
-
   const onSliderChange = (value) => {
     setSliderValue(value);
-    console.log(sliderValue);
-
-    if (sliderValue < positions.yellow) {
+    if (sliderValue <= positions.yellow) {
       setDisplayedArtists(green);
     } else if (
       sliderValue >= positions.yellow &&
-      sliderValue < positions.orange
+      sliderValue <= positions.orange
     ) {
       setDisplayedArtists(yellow);
     } else if (
       sliderValue >= positions.orange &&
-      sliderValue < Math.floor(100 - red.percentage)
+      sliderValue <= Math.floor(100 - red.percentage)
     ) {
       setDisplayedArtists(orange);
-    } else if (sliderValue > Math.floor(100 - red.percentage)) {
+    } else if (sliderValue >= Math.floor(100 - red.percentage)) {
       setDisplayedArtists(red);
     }
   };
@@ -97,7 +93,7 @@ export default function Main(props) {
               <>
                 <p
                   style={{
-                    color: displayedArtists.color
+                    color: displayedArtists.color,
                   }}
                 >
                   {artist.name}

@@ -10,7 +10,7 @@ export const getTopArtists = async (accessToken) => {
         },
         params: {
           limit: "50",
-          time_range: "medium_term",
+          time_range: "short_term",
         },
       }
     );

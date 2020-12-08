@@ -9,14 +9,12 @@ header {
   padding: 0 50px;
   color: #F4C87B;
 }
-
 header a {
   font-size: 30px;
   border-radius: 5px;
   color: #F9564F;
   text-decoration-color: #F1B855;
 }
-
 header span {
   font-size: 30px;
 }

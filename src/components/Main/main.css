@@ -6,7 +6,6 @@ font-family: 'Comfortaa';
 color: white;
 background-color: black;
 }
-
 main label {
   font-weight: bold;
   display: flex;
@@ -22,15 +21,12 @@ main h5 {
   font-size: 15px;
   font-size: 12px;
 }
-
 #popular {
   color: #3DDC97;
 }
 #obscure {
   color: #FF495C;
 }
-
-
 .artistGrid {
   font-family: 'Montserrat';
   font-weight: bold;
@@ -39,10 +35,7 @@ main h5 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
-
 }
-
 main p {
   margin: 5px 10px;
   flex-shrink: 5;
