@@ -87,21 +87,20 @@ export default function Main(props) {
 
       <div className="artistGrid">
         {displayedArtists ? (
+          
           displayedArtists.artists.map((artist) => {
             return (
               <>
-                <p
-                  style={{
-                    color: "#2FBF71",
-                  }}
-                >
+                <p>
                   {artist.name}
                 </p>
               </>
             );
           })
         ) : (
-          <p style={{ fontWeight: "bold" }}>
+            <p style={{
+              fontWeight: "bold",
+            color: "white" }}>
             Move the slider to explore your top artists.
           </p>
         )}
