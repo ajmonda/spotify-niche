@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 
-import Header from "./components/Main/Header/Header";
+import Header from './components/Header/Header'
 import Genres from "./components/Genres/Genres";
 import GradientSlider from "./components/GradientSlider/GradientSlider";
 import Login from "./components/Login/Login";
 
-import { getNicheScore, getTopArtists, getTopGenres, rankArtists } from "./services";
+import {
+  getTopArtists,
+  getNicheScore,
+  getScoreDescriptor,
+  getTopGenres,
+  rankArtists,
+  getMostObscureArtist,
+} from "./services";
 
 import "./App.css";
 
 function App() {
-  const [artists, setArtists] = useState([]);
+  const [currentArtists, setCurrentArtists] = useState([]);
   const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([]);
   const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([]);
-  const [timeRange, setTimeRange] = useState("short_term");
-  const [innerText, setInnerText] = useState("four weeks");
-
-  const genres = getTopGenres(artists).slice(0, 30).sort();
+  const [topArtistsLongTerm, setTopArtistsLongTerm] = useState([]);
+  const [selectValue, setSelectValue] = useState("four weeks");
 
   const urlString = queryString.parse(window.location.search);
   const accessToken = urlString.access_token;
+
+  const genres = getTopGenres(currentArtists).slice(0, 30).sort();
+  const mostObscureArtist = getMostObscureArtist(currentArtists);
+  const nicheScore = getNicheScore(currentArtists);
+  const scoreDescriptor = getScoreDescriptor(nicheScore);
+  const { green, yellow, orange, red } = rankArtists(currentArtists);
 
   useEffect(() => {
     const apiCall = async () => {
@@ -32,28 +43,29 @@ function App() {
         accessToken,
         "medium_term"
       );
+      const topArtistsLongTerm = await getTopArtists(accessToken, "long_term");
 
       setTopArtistsShortTerm(topArtistsShortTerm);
       setTopArtistsMediumTerm(topArtistsMediumTerm);
-
-      setArtists(topArtistsShortTerm);
+      setTopArtistsLongTerm(topArtistsLongTerm);
+      setCurrentArtists(topArtistsShortTerm);
     };
     apiCall();
   }, []);
 
-  const nicheScore = getNicheScore(artists)
-
-  const { green, yellow, orange, red } = rankArtists(artists);
-
-  const handleClick = () => {
-    if (timeRange === "short_term") {
-      setTimeRange("medium_term");
-      setInnerText("six months");
-      setArtists(topArtistsMediumTerm);
-    } else {
-      setTimeRange("short_term");
-      setInnerText("four weeks");
-      setArtists(topArtistsShortTerm);
+  const handleChange = (e) => {
+    switch (e.target.value) {
+      case "six months":
+        setSelectValue(e.target.value);
+        setCurrentArtists(topArtistsMediumTerm);
+        break;
+      case "several years":
+        setSelectValue(e.target.value);
+        setCurrentArtists(topArtistsLongTerm);
+        break;
+      default:
+        setSelectValue(e.target.value);
+        setCurrentArtists(topArtistsShortTerm);
     }
   };
 
@@ -62,10 +74,11 @@ function App() {
       {accessToken ? (
         <>
           <Header
-            timeRange={timeRange}
+            mostObscureArtist={mostObscureArtist}
             nicheScore={nicheScore}
-            innerText={innerText}
-            handleClick={handleClick}
+            scoreDescriptor={scoreDescriptor}
+            selectValue={selectValue}
+            handleChange={handleChange}
           />
           <Genres genres={genres} />
           <GradientSlider

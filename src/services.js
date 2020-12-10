@@ -15,17 +15,11 @@ export const getTopArtists = async (accessToken, timeRange) => {
       }
     );
     const topArtists = response.data.items;
-    sortArtistsByUniqueness(topArtists);
+
     return topArtists;
   } catch (error) {
     throw error;
   }
-};
-
-const sortArtistsByUniqueness = (topArtists) => {
-  topArtists.sort(
-    (a, b) => parseFloat(a.popularity) - parseFloat(b.popularity)
-  );
 };
 
 export const getNicheScore = (artists) => {
@@ -33,8 +27,28 @@ export const getNicheScore = (artists) => {
   artists.map((artist) => {
     sum += artist.popularity;
   });
-  return 100 - Math.floor(sum / 100)
+  return 100 - Math.floor(sum / 100);
 };
+
+export const getScoreDescriptor = (nicheScore) => {
+  if (nicheScore > 75) {
+    return "very obscure";
+  } else if (nicheScore > 50) {
+    return "pretty obscure";
+  } else if (nicheScore > 25) {
+    return "popular";
+  } else {
+    return "basic";
+  }
+};
+
+export const getMostObscureArtist = (topArtists) => {
+  topArtists.sort(
+    (a, b) => parseFloat(a.popularity) - parseFloat(b.popularity)
+  );
+  return topArtists[0]
+}
+
 
 export const rankArtists = (artists) => {
   const ranking = {
@@ -70,7 +84,7 @@ export const rankArtists = (artists) => {
     } else if (artist.popularity > 75) {
       ranking.green.artists.push(artist);
     }
-    return ranking
+    return ranking;
   });
 
   ranking.red.percentage = Math.floor((ranking.red.artists.length / 50) * 100);
@@ -83,7 +97,7 @@ export const rankArtists = (artists) => {
   ranking.green.percentage = Math.floor(
     (ranking.green.artists.length / 50) * 100
   );
-  return ranking
+  return ranking;
 };
 
 export const getTopGenres = (topArtists) => {

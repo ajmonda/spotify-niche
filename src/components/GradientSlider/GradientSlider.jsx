@@ -3,7 +3,7 @@ import Slider from "rc-slider";
 
 import "rc-slider/assets/index.css";
 
-export default function Gradientlider(props) {
+export default function GradientSlider(props) {
   const { green, yellow, orange, red } = props;
 
   const [displayedArtists, setDisplayedArtists] = useState(null);
