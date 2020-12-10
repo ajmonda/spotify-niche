@@ -1,52 +1,60 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Main/Header/Header";
-import Login from "./components/Login/Login";
-import Main from "./components/Main/Main";
 import queryString from "query-string";
 
+import Header from "./components/Main/Header/Header";
+import Genres from "./components/Genres/Genres";
+import GradientSlider from "./components/GradientSlider/GradientSlider";
+import Login from "./components/Login/Login";
+
+import { getNicheScore, getTopArtists, getTopGenres, rankArtists } from "./services";
+
 import "./App.css";
-import { getTopArtists, rankArtists } from "./services";
 
 function App() {
   const [artists, setArtists] = useState([]);
-
-  const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([])
-  const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([])
-
+  const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([]);
+  const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([]);
   const [timeRange, setTimeRange] = useState("short_term");
   const [innerText, setInnerText] = useState("four weeks");
 
-  const { obscurityRating } = rankArtists(artists);
+  const genres = getTopGenres(artists).slice(0, 30).sort();
 
-  const string = queryString.parse(window.location.search);
-  const accessToken = string.access_token;
+  const urlString = queryString.parse(window.location.search);
+  const accessToken = urlString.access_token;
 
   useEffect(() => {
     const apiCall = async () => {
-      const topArtistsShortTerm = await getTopArtists(accessToken, "short_term");
-      const topArtistsMediumTerm = await getTopArtists(accessToken, "medium_term");
+      const topArtistsShortTerm = await getTopArtists(
+        accessToken,
+        "short_term"
+      );
+      const topArtistsMediumTerm = await getTopArtists(
+        accessToken,
+        "medium_term"
+      );
 
-      setTopArtistsShortTerm(topArtistsShortTerm)
-      setTopArtistsMediumTerm(topArtistsMediumTerm)
+      setTopArtistsShortTerm(topArtistsShortTerm);
+      setTopArtistsMediumTerm(topArtistsMediumTerm);
 
       setArtists(topArtistsShortTerm);
-
     };
     apiCall();
   }, []);
 
-  const handleClick = (e) => {
-    e.preventDefault()
+  const nicheScore = getNicheScore(artists)
+
+  const { green, yellow, orange, red } = rankArtists(artists);
+
+  const handleClick = () => {
     if (timeRange === "short_term") {
       setTimeRange("medium_term");
       setInnerText("six months");
-      setArtists(topArtistsMediumTerm)
+      setArtists(topArtistsMediumTerm);
     } else {
       setTimeRange("short_term");
       setInnerText("four weeks");
-      setArtists(topArtistsShortTerm)
+      setArtists(topArtistsShortTerm);
     }
-
   };
 
   return (
@@ -55,11 +63,17 @@ function App() {
         <>
           <Header
             timeRange={timeRange}
-            obscurityRating={obscurityRating}
+            nicheScore={nicheScore}
             innerText={innerText}
             handleClick={handleClick}
           />
-          <Main artists={artists} />
+          <Genres genres={genres} />
+          <GradientSlider
+            green={green}
+            yellow={yellow}
+            orange={orange}
+            red={red}
+          />
         </>
       ) : (
         <>
@@ -69,5 +83,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

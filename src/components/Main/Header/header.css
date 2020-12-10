@@ -6,11 +6,7 @@ header {
   display: flex;
   flex-direction: row;
   align-content: center;
-  flex-wrap: wrap;
-  padding: 0;
   color: #f4c87b;
-  position: absolute;
-  padding: 0 20vw;
 }
 
 .timeWrapper span:hover {

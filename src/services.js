@@ -14,10 +14,8 @@ export const getTopArtists = async (accessToken, timeRange) => {
         },
       }
     );
-
     const topArtists = response.data.items;
     sortArtistsByUniqueness(topArtists);
-
     return topArtists;
   } catch (error) {
     throw error;
@@ -30,46 +28,49 @@ const sortArtistsByUniqueness = (topArtists) => {
   );
 };
 
+export const getNicheScore = (artists) => {
+  let sum = 0;
+  artists.map((artist) => {
+    sum += artist.popularity;
+  });
+  return 100 - Math.floor(sum / 100)
+};
+
 export const rankArtists = (artists) => {
   const ranking = {
-    obscurityRating: 0,
     green: {
-      color: '#36FC99',
+      color: "#36FC99",
       artists: [],
       percentage: null,
     },
     yellow: {
-      color: '#E5C88B',
+      color: "#E5C88B",
       artists: [],
       percentage: null,
     },
     orange: {
-      color: '#EE896D',
+      color: "#EE896D",
       artists: [],
       percentage: null,
     },
     red: {
-      color: '#F96269',
+      color: "#F96269",
       artists: [],
       percentage: null,
     },
   };
 
   artists.map((artist) => {
-
     if (artist.popularity <= 25) {
       ranking.red.artists.push(artist);
-      ranking.obscurityRating += 2;
     } else if (artist.popularity > 25 && artist.popularity <= 50) {
       ranking.orange.artists.push(artist);
-      ranking.obscurityRating += 1.5;
     } else if (artist.popularity > 50 && artist.popularity <= 75) {
       ranking.yellow.artists.push(artist);
-      ranking.obscurityRating += 1;
     } else if (artist.popularity > 75) {
       ranking.green.artists.push(artist);
     }
-    
+    return ranking
   });
 
   ranking.red.percentage = Math.floor((ranking.red.artists.length / 50) * 100);

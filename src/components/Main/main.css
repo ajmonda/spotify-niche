@@ -7,7 +7,7 @@ color: white;
 background-color: black;
 margin-top: 200px;
 }
-main label {
+label {
   font-weight: bold;
   display: flex;
   flex-direction: row;
@@ -18,7 +18,7 @@ main label {
   padding: 5px 5px;
   padding-top: 0;
 }
-main h5 {
+h5 {
   margin: 0;
   font-size: 15px;
   font-size: 12px;
