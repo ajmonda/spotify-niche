@@ -4,6 +4,7 @@ import queryString from "query-string";
 import Header from "./components/Header/Header";
 import Genres from "./components/Genres/Genres";
 import GradientSlider from "./components/GradientSlider/GradientSlider";
+import ArtistsGrid from "./components/ArtistsGrid/ArtistsGrid";
 import Login from "./components/Login/Login";
 
 import {
@@ -11,15 +12,20 @@ import {
   getNicheScore,
   getScoreDescriptor,
   getTopGenres,
+  getTopTracks,
 } from "./services";
 
 import "./App.css";
 
 function App() {
   const [currentArtists, setCurrentArtists] = useState([]);
+  const [currentTracks, setCurrentTracks] = useState([]);
   const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([]);
+  const [topTracksShortTerm, setTopTracksShortTerm] = useState([]);
   const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([]);
+  const [topTracksMediumTerm, setTopTracksMediumTerm] = useState([]);
   const [topArtistsLongTerm, setTopArtistsLongTerm] = useState([]);
+  const [topTracksLongTerm, setTopTracksLongTerm] = useState([]);
   const [selectValue, setSelectValue] = useState("short_term");
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [sliderValue, setSliderValue] = useState(50);
@@ -37,20 +43,35 @@ function App() {
         accessToken,
         "short_term"
       );
+      const topTracksShortTerm = await getTopTracks(accessToken, "short_term");
+
       const topArtistsMediumTerm = await getTopArtists(
         accessToken,
         "medium_term"
       );
+      const topTracksMediumTerm = await getTopTracks(
+        accessToken,
+        "medium_term"
+      );
+
       const topArtistsLongTerm = await getTopArtists(accessToken, "long_term");
+      const topTracksLongTerm = await getTopTracks(accessToken, "long_term");
 
       setTopArtistsShortTerm(topArtistsShortTerm);
       setTopArtistsMediumTerm(topArtistsMediumTerm);
       setTopArtistsLongTerm(topArtistsLongTerm);
 
+      setTopTracksShortTerm(topTracksShortTerm);
+      setTopTracksMediumTerm(topTracksMediumTerm);
+      setTopTracksLongTerm(topTracksLongTerm);
+
       setCurrentArtists(topArtistsShortTerm);
+      setCurrentTracks(topTracksShortTerm);
     };
     apiCall();
   }, []);
+
+  console.log(currentTracks)
 
   const handleChange = (e) => {
     setSelectValue(e.target.value);
@@ -114,6 +135,10 @@ function App() {
             displayedArtists={displayedArtists}
             sliderValue={sliderValue}
             onSliderChange={onSliderChange}
+          />
+          <ArtistsGrid
+            currentArtists={currentArtists}
+            displayedArtists={displayedArtists}
           />
         </>
       ) : (
