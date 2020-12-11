@@ -20,7 +20,9 @@ function App() {
   const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([]);
   const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([]);
   const [topArtistsLongTerm, setTopArtistsLongTerm] = useState([]);
-  const [selectValue, setSelectValue] = useState("four weeks");
+  const [selectValue, setSelectValue] = useState("short_term");
+  const [displayedArtists, setDisplayedArtists] = useState([]);
+  const [sliderValue, setSliderValue] = useState(50);
 
   const urlString = queryString.parse(window.location.search);
   const accessToken = urlString.access_token;
@@ -44,24 +46,55 @@ function App() {
       setTopArtistsShortTerm(topArtistsShortTerm);
       setTopArtistsMediumTerm(topArtistsMediumTerm);
       setTopArtistsLongTerm(topArtistsLongTerm);
+
       setCurrentArtists(topArtistsShortTerm);
     };
     apiCall();
   }, []);
 
   const handleChange = (e) => {
+    setSelectValue(e.target.value);
+    setSliderValue(50);
+    setDisplayedArtists([]);
     switch (e.target.value) {
-      case "six months":
-        setSelectValue(e.target.value);
+      case "medium_term":
         setCurrentArtists(topArtistsMediumTerm);
         break;
-      case "several years":
-        setSelectValue(e.target.value);
+      case "long_term":
         setCurrentArtists(topArtistsLongTerm);
         break;
       default:
-        setSelectValue(e.target.value);
         setCurrentArtists(topArtistsShortTerm);
+    }
+  };
+
+  const onSliderChange = (value) => {
+    setSliderValue(value);
+    if (
+      value < currentArtists[0].popularity ||
+      value > currentArtists[49].popularity
+    ) {
+      return false;
+    } else if (value <= 25) {
+      setDisplayedArtists(
+        currentArtists.filter((artist) => artist.popularity <= value)
+      );
+    } else if (value < 50) {
+      setDisplayedArtists(
+        currentArtists.filter(
+          (artist) => artist.popularity <= value && artist.popularity >= 25
+        )
+      );
+    } else if (value >= 50 && value < 75) {
+      setDisplayedArtists(
+        currentArtists.filter(
+          (artist) => artist.popularity >= value && artist.popularity <= 75
+        )
+      );
+    } else {
+      setDisplayedArtists(
+        currentArtists.filter((artist) => artist.popularity >= value)
+      );
     }
   };
 
@@ -78,6 +111,9 @@ function App() {
           <Genres genres={genres} />
           <GradientSlider
             currentArtists={currentArtists}
+            displayedArtists={displayedArtists}
+            sliderValue={sliderValue}
+            onSliderChange={onSliderChange}
           />
         </>
       ) : (

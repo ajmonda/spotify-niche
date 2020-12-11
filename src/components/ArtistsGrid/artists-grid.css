@@ -8,13 +8,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  overflow: scroll;
   margin-top: 15px;
-}
-
-.artistsGrid img {
-  width: 75px;
-  height: 75px;
-  object-fit: cover;
 }
 

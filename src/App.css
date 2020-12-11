@@ -2,11 +2,12 @@
 
 .App {
 height: 100%;
-padding: 5vh 3vw;
+padding: 2vh 3vw;
 font-family: 'Comfortaa';
 color: white;
 display: flex;
 flex-direction: column;
+justify-content: center;
 }
 h5 {
   margin: 0;

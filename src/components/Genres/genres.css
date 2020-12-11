@@ -3,7 +3,7 @@
   flex-direction: row;
   width: 100%;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
 }
@@ -19,9 +19,9 @@
   padding: 0;
 }
 .genreList {
-  margin-left: 10px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: space-around;
 }

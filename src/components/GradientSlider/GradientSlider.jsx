@@ -7,45 +7,12 @@ import "./gradient-slider.css";
 import "rc-slider/assets/index.css";
 
 export default function GradientSlider(props) {
-  const { currentArtists } = props;
+  const { displayedArtists, onSliderChange, sliderValue } = props;
 
-  const [displayedArtists, setDisplayedArtists] = useState([]);
-  const [sliderValue, setSliderValue] = useState(50);
-
-  const gradient = `#F679E5,
-    #F497DA 25%,
-    #F8BDC4 50%,
-    #DEF6CA 100%`;
-
-  const onSliderChange = (value) => {
-    setSliderValue(value);
-    if (
-      value < currentArtists[0].popularity ||
-      value > currentArtists[49].popularity
-    ) {
-      return false;
-    } else if (value <= 25) {
-      setDisplayedArtists(
-        currentArtists.filter((artist) => artist.popularity <= value)
-      );
-    } else if (value < 50) {
-      setDisplayedArtists(
-        currentArtists.filter(
-          (artist) => artist.popularity <= value && artist.popularity >= 25
-        )
-      );
-    } else if (value >= 50 && value < 75) {
-      setDisplayedArtists(
-        currentArtists.filter(
-          (artist) => artist.popularity >= value && artist.popularity <= 75
-        )
-      );
-    } else {
-      setDisplayedArtists(
-        currentArtists.filter((artist) => artist.popularity >= value)
-      );
-    } 
-  };
+  const gradient = `#56203D,
+    #483A58 25%,
+    #56638A 50%,
+    #63A088 100%`;
 
   return (
     <>

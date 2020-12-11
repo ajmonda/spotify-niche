@@ -18,7 +18,7 @@ export default function Genres(props) {
                 alignSelf: "center",
               }}
             >
-              {genre[0]},
+              {genre[0]}
             </p>
           );
         })}
