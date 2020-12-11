@@ -1,6 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-bottom: 3vh;
+}
+header h3 {
+  font-size: 30px;
+  color: white;
+  margin: 0;
+}
+header h1 {
+  font-size: 100px;
+  margin: 0;
+}
+header h4 {
+  font-size: 35px;
+  color: #D9B8C4;
+  margin: 0;
+}
+
+header select {
+  padding: 2px;
+  color: black;
+  font-weight: bold;
+  font-family: 'Roboto';
+}
+
+.score {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center; 
+  text-shadow: 1px 1.5px #D9B8C4;
+}
+
+.timeSelect label {
+  font-size: 18px;
+}
+
+/* header {
   font-size: 20px;
   font-family: "Comfortaa";
   display: flex;
@@ -59,4 +100,4 @@ h2 {
 a {
   text-align: center;
   margin: auto;
-}
+} */

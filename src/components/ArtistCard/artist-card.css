@@ -1,0 +1,14 @@
+.artistCard {
+  display: flex;
+  width: 100px;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.artistCard img {
+  width: 75px;
+  height: 75px;
+  align-self: center;
+  object-fit: cover;
+}
