@@ -71,8 +71,6 @@ function App() {
     apiCall();
   }, []);
 
-  console.log(currentTracks)
-
   const handleChange = (e) => {
     setSelectValue(e.target.value);
     setSliderValue(50);
@@ -112,7 +110,7 @@ function App() {
           (artist) => artist.popularity >= value && artist.popularity <= 75
         )
       );
-    } else {
+    } else if (value > 75) {
       setDisplayedArtists(
         currentArtists.filter((artist) => artist.popularity >= value)
       );
