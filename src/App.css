@@ -2,7 +2,7 @@
 
 .App {
 height: 100vh;
-padding: 5vh 15vw;
+padding: 5vh 3vw;
 font-family: 'Comfortaa';
 color: white;
 display: flex;
@@ -12,15 +12,6 @@ h5 {
   margin: 0;
   font-size: 15px;
   font-size: 12px;
-}
-.artistGrid {
-  font-family: 'Montserrat';
-  font-weight: bold;
-  margin-top: 30px;
-  font-size: 17px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 main p {
   margin: 5px 10px;

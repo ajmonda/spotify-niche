@@ -25,15 +25,6 @@ export default function Header(props) {
         <h1>{nicheScore}</h1>
         <h4>{scoreDescriptor}</h4>
       </div>
-      <h4>
-        Most Obscure Top Artist:{" "}
-        {mostObscureArtist ? mostObscureArtist.name : null}
-      </h4>
-      <img
-        src={mostObscureArtist ? mostObscureArtist.images[0].url : null}
-        alt="artist image"
-        width="100px"
-      />
     </header>
   );
 }

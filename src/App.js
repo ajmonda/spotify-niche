@@ -28,7 +28,7 @@ function App() {
   const urlString = queryString.parse(window.location.search);
   const accessToken = urlString.access_token;
 
-  const genres = getTopGenres(currentArtists).slice(0, 30).sort();
+  const genres = getTopGenres(currentArtists).slice(0, 10).sort();
   const mostObscureArtist = getMostObscureArtist(currentArtists);
   const groupedArtists = groupArtistsByPopularity(currentArtists)
   const nicheScore = getNicheScore(currentArtists);

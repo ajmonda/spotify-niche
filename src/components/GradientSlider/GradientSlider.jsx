@@ -5,9 +5,9 @@ import "./gradient-slider.css";
 import "rc-slider/assets/index.css";
 
 export default function GradientSlider(props) {
-  const {groupedArtists} = props;
+  const { groupedArtists } = props;
 
-  const [displayedArtists, setDisplayedArtists] = useState(null);
+  const [displayedArtists, setDisplayedArtists] = useState([]);
   const [sliderValue, setSliderValue] = useState(50);
 
   const gradient = `#F679E5,
@@ -32,7 +32,7 @@ export default function GradientSlider(props) {
   console.log(sliderValue);
 
   return (
-    <>
+    <div className="gradientSlider">
       <Slider
         min={0}
         max={100}
@@ -64,12 +64,20 @@ export default function GradientSlider(props) {
       </label>
 
       <div className="artistGrid">
-        {displayedArtists
+        {displayedArtists.length > 0
           ? displayedArtists.map((artist) => {
-              return <p>{artist.name}</p>;
+              return (
+                <div className="artistCard">
+                  <img
+                    src={artist.images[0] ? artist.images[0].url : null}
+                    alt={artist.name}
+                  />
+                  <p>{artist.name}</p>
+                </div>
+              );
             })
-          : null}
+          : <h6>Move the slider to explore your top artists.</h6>}
       </div>
-    </>
+    </div>
   );
 }

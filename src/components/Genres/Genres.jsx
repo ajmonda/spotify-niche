@@ -13,12 +13,12 @@ export default function Genres(props) {
               style={{
                 fontSize:
                   genre[1] > 3 ? `${genre[1] + 15}px` : `${genre[1] + 10}px`,
-                fontWeight: genre[1] > 4 ? "bold" : "200",
-                color: genre[1] > 5 ? "white" : null,
+                fontWeight: genre[1] > 5 ? "bold" : "200",
+                color: genre[1] > 10 ? "white" : null,
                 alignSelf: "center",
               }}
             >
-              {genre[0]}
+              {genre[0]},
             </p>
           );
         })}

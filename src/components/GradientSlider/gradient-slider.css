@@ -1,4 +1,4 @@
-label {
+.gradientSlider label {
   font-weight: bold;
   display: flex;
   flex-direction: row;
@@ -16,4 +16,16 @@ label {
 }
 #popular {
   color: #DEF6CA;
+}
+
+.artistGrid img {
+  width: 30vw;
+}
+.artistGrid {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 17px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
