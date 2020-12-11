@@ -17,15 +17,3 @@
 #popular {
   color: #DEF6CA;
 }
-
-.artistGrid img {
-  width: 30vw;
-}
-.artistGrid {
-  font-family: 'Montserrat';
-  font-weight: bold;
-  font-size: 17px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
