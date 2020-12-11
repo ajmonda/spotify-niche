@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 
-import Header from './components/Header/Header'
+import Header from "./components/Header/Header";
 import Genres from "./components/Genres/Genres";
 import GradientSlider from "./components/GradientSlider/GradientSlider";
 import Login from "./components/Login/Login";
@@ -13,6 +13,7 @@ import {
   getTopGenres,
   rankArtists,
   getMostObscureArtist,
+  groupArtistsByPopularity,
 } from "./services";
 
 import "./App.css";
@@ -29,6 +30,7 @@ function App() {
 
   const genres = getTopGenres(currentArtists).slice(0, 30).sort();
   const mostObscureArtist = getMostObscureArtist(currentArtists);
+  const groupedArtists = groupArtistsByPopularity(currentArtists)
   const nicheScore = getNicheScore(currentArtists);
   const scoreDescriptor = getScoreDescriptor(nicheScore);
   const { green, yellow, orange, red } = rankArtists(currentArtists);
@@ -77,11 +79,15 @@ function App() {
             mostObscureArtist={mostObscureArtist}
             nicheScore={nicheScore}
             scoreDescriptor={scoreDescriptor}
+            mostObscureArtist={mostObscureArtist}
             selectValue={selectValue}
             handleChange={handleChange}
           />
           <Genres genres={genres} />
           <GradientSlider
+            currentArtists={currentArtists}
+            groupedArtists={groupedArtists}
+            mostObscureArtist={mostObscureArtist}
             green={green}
             yellow={yellow}
             orange={orange}

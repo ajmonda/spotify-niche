@@ -15,7 +15,6 @@ export const getTopArtists = async (accessToken, timeRange) => {
       }
     );
     const topArtists = response.data.items;
-
     return topArtists;
   } catch (error) {
     throw error;
@@ -31,14 +30,16 @@ export const getNicheScore = (artists) => {
 };
 
 export const getScoreDescriptor = (nicheScore) => {
-  if (nicheScore > 75) {
-    return "very obscure";
+  if (nicheScore > 85) {
+    return "Extremely Obscure";
+  } else if (nicheScore > 75) {
+    return "Very Obscure";
   } else if (nicheScore > 50) {
-    return "pretty obscure";
+    return "Pretty Obscure";
   } else if (nicheScore > 25) {
-    return "popular";
+    return "Kinda Basic";
   } else {
-    return "basic";
+    return "Basic";
   }
 };
 
@@ -46,9 +47,8 @@ export const getMostObscureArtist = (topArtists) => {
   topArtists.sort(
     (a, b) => parseFloat(a.popularity) - parseFloat(b.popularity)
   );
-  return topArtists[0]
-}
-
+  return topArtists[0];
+};
 
 export const rankArtists = (artists) => {
   const ranking = {
@@ -76,28 +76,35 @@ export const rankArtists = (artists) => {
 
   artists.map((artist) => {
     if (artist.popularity <= 25) {
-      ranking.red.artists.push(artist);
+      ranking.red.percentage += 1
     } else if (artist.popularity > 25 && artist.popularity <= 50) {
-      ranking.orange.artists.push(artist);
+      ranking.orange.percentage += 1
     } else if (artist.popularity > 50 && artist.popularity <= 75) {
-      ranking.yellow.artists.push(artist);
+      ranking.yellow.percentage += 1
     } else if (artist.popularity > 75) {
-      ranking.green.artists.push(artist);
+      ranking.green.percentage += 1
     }
     return ranking;
   });
 
-  ranking.red.percentage = Math.floor((ranking.red.artists.length / 50) * 100);
-  ranking.orange.percentage = Math.floor(
-    (ranking.orange.artists.length / 50) * 100
-  );
-  ranking.yellow.percentage = Math.floor(
-    (ranking.yellow.artists.length / 50) * 100
-  );
-  ranking.green.percentage = Math.floor(
-    (ranking.green.artists.length / 50) * 100
-  );
+  ranking.red.percentage = Math.floor(ranking.red.percentage / 50);
+  ranking.orange.percentage = Math.floor
+    (ranking.orange.artists.length / 50);
+  ranking.yellow.percentage = Math.floor
+    (ranking.yellow.percentage / 50);
+  ranking.green.percentage = Math.floor(ranking.green.percentage / 50);
   return ranking;
+};
+
+export const groupArtistsByPopularity = (topArtists) => {
+  const groupedArtists = topArtists.reduce((accumulator, value) => {
+    if (!accumulator[value.popularity]) {
+      accumulator[value.popularity] = [];
+    }
+    accumulator[value.popularity].push(value);
+    return accumulator;
+  }, []);
+  return groupedArtists
 };
 
 export const getTopGenres = (topArtists) => {

@@ -8,28 +8,10 @@ color: white;
 display: flex;
 flex-direction: column;
 }
-
-label {
-  font-weight: bold;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
-  margin-top: 41px;
-  padding: 5px 5px;
-  padding-top: 0;
-}
 h5 {
   margin: 0;
   font-size: 15px;
   font-size: 12px;
-}
-#popular {
-  color: #3DDC97;
-}
-#obscure {
-  color: #FF495C;
 }
 .artistGrid {
   font-family: 'Montserrat';
