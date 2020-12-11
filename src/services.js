@@ -85,3 +85,14 @@ export const getTopGenres = (topArtists) => {
   }
   return Object.entries(genreFrequencies).sort((a, b) => b[1] - a[1]);
 };
+
+export const groupArtistsByPopularity = (topArtists) => {
+  const groupedArtists = topArtists.reduce((accumulator, value) => {
+    if (!accumulator[value.popularity]) {
+      accumulator[value.popularity] = [];
+    }
+    accumulator[value.popularity].push(value);
+    return accumulator;
+  }, []);
+  return groupedArtists
+};
