@@ -5,7 +5,7 @@ import "./gradient-slider.css";
 import "rc-slider/assets/index.css";
 
 export default function GradientSlider(props) {
-  const { groupedArtists } = props;
+  const { currentArtists } = props;
 
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [sliderValue, setSliderValue] = useState(50);
@@ -15,21 +15,41 @@ export default function GradientSlider(props) {
     #F8BDC4 50%,
     #DEF6CA 100%`;
 
-  console.log(sliderValue);
-
   const onSliderChange = (value) => {
-    groupedArtists.map((array, i) => {
-      if (value === i) {
-        setSliderValue(value);
-        setDisplayedArtists(array);
-        console.log(sliderValue);
-      } else {
-        setSliderValue(value);
-      }
-    });
+    setSliderValue(value);
+    if (
+      value < currentArtists[0].popularity ||
+      value > currentArtists[49].popularity
+    ) {
+      return false;
+    } else if (value <= 25) {
+      setDisplayedArtists(
+        currentArtists.filter((artist) => artist.popularity <= value)
+      );
+    } else if (value < 50) {
+      setDisplayedArtists(
+        currentArtists.filter(
+          (artist) => artist.popularity <= value && artist.popularity >= 25
+        )
+      );
+    } else if (value > 50 && value < 75) {
+      setDisplayedArtists(
+        currentArtists.filter(
+          (artist) => artist.popularity >= value && artist.popularity <= 75
+        )
+      );
+    } else if (value >= 75) {
+      setDisplayedArtists(
+        currentArtists.filter((artist) => artist.popularity >= value)
+      );
+    } else {
+      setDisplayedArtists(
+        currentArtists.filter(
+          (artist) => artist.popularity > 40 && artist.popularity < 60
+        )
+      );
+    }
   };
-
-  console.log(sliderValue);
 
   return (
     <div className="gradientSlider">
@@ -64,19 +84,22 @@ export default function GradientSlider(props) {
       </label>
 
       <div className="artistGrid">
-        {displayedArtists.length > 0
-          ? displayedArtists.map((artist) => {
-              return (
-                <div className="artistCard">
-                  <img
+        {displayedArtists.length > 0 ? (
+          displayedArtists.map((artist, i) => {
+            return (
+              <div className="artistCard"
+              key={i}>
+                <img
                     src={artist.images[0] ? artist.images[0].url : null}
                     alt={artist.name}
                   />
-                  <p>{artist.name}</p>
-                </div>
-              );
-            })
-          : <h6>Move the slider to explore your top artists.</h6>}
+                <p>{artist.name}</p>
+              </div>
+            );
+          })
+        ) : (
+          <h6>Move the slider to explore your top artists.</h6>
+        )}
       </div>
     </div>
   );

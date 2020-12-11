@@ -11,9 +11,6 @@ import {
   getNicheScore,
   getScoreDescriptor,
   getTopGenres,
-  rankArtists,
-  getMostObscureArtist,
-  groupArtistsByPopularity,
 } from "./services";
 
 import "./App.css";
@@ -28,12 +25,9 @@ function App() {
   const urlString = queryString.parse(window.location.search);
   const accessToken = urlString.access_token;
 
-  const genres = getTopGenres(currentArtists).slice(0, 10).sort();
-  const mostObscureArtist = getMostObscureArtist(currentArtists);
-  const groupedArtists = groupArtistsByPopularity(currentArtists)
+  const genres = getTopGenres(currentArtists).slice(0, 20).sort();
   const nicheScore = getNicheScore(currentArtists);
   const scoreDescriptor = getScoreDescriptor(nicheScore);
-  const { green, yellow, orange, red } = rankArtists(currentArtists);
 
   useEffect(() => {
     const apiCall = async () => {
@@ -76,22 +70,14 @@ function App() {
       {accessToken ? (
         <>
           <Header
-            mostObscureArtist={mostObscureArtist}
             nicheScore={nicheScore}
             scoreDescriptor={scoreDescriptor}
-            mostObscureArtist={mostObscureArtist}
             selectValue={selectValue}
             handleChange={handleChange}
           />
           <Genres genres={genres} />
           <GradientSlider
             currentArtists={currentArtists}
-            groupedArtists={groupedArtists}
-            mostObscureArtist={mostObscureArtist}
-            green={green}
-            yellow={yellow}
-            orange={orange}
-            red={red}
           />
         </>
       ) : (
