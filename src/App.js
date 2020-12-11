@@ -1,52 +1,74 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Main/Header/Header";
-import Login from "./components/Login/Login";
-import Main from "./components/Main/Main";
 import queryString from "query-string";
 
+import Header from "./components/Header/Header";
+import Genres from "./components/Genres/Genres";
+import GradientSlider from "./components/GradientSlider/GradientSlider";
+import Login from "./components/Login/Login";
+
+import {
+  getTopArtists,
+  getNicheScore,
+  getScoreDescriptor,
+  getTopGenres,
+  rankArtists,
+  getMostObscureArtist,
+  groupArtistsByPopularity,
+} from "./services";
+
 import "./App.css";
-import { getTopArtists, rankArtists } from "./services";
 
 function App() {
-  const [artists, setArtists] = useState([]);
+  const [currentArtists, setCurrentArtists] = useState([]);
+  const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([]);
+  const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([]);
+  const [topArtistsLongTerm, setTopArtistsLongTerm] = useState([]);
+  const [selectValue, setSelectValue] = useState("four weeks");
 
-  const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([])
-  const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([])
+  const urlString = queryString.parse(window.location.search);
+  const accessToken = urlString.access_token;
 
-  const [timeRange, setTimeRange] = useState("short_term");
-  const [innerText, setInnerText] = useState("four weeks");
-
-  const { obscurityRating } = rankArtists(artists);
-
-  const string = queryString.parse(window.location.search);
-  const accessToken = string.access_token;
+  const genres = getTopGenres(currentArtists).slice(0, 10).sort();
+  const mostObscureArtist = getMostObscureArtist(currentArtists);
+  const groupedArtists = groupArtistsByPopularity(currentArtists)
+  const nicheScore = getNicheScore(currentArtists);
+  const scoreDescriptor = getScoreDescriptor(nicheScore);
+  const { green, yellow, orange, red } = rankArtists(currentArtists);
 
   useEffect(() => {
     const apiCall = async () => {
-      const topArtistsShortTerm = await getTopArtists(accessToken, "short_term");
-      const topArtistsMediumTerm = await getTopArtists(accessToken, "medium_term");
+      const topArtistsShortTerm = await getTopArtists(
+        accessToken,
+        "short_term"
+      );
+      const topArtistsMediumTerm = await getTopArtists(
+        accessToken,
+        "medium_term"
+      );
+      const topArtistsLongTerm = await getTopArtists(accessToken, "long_term");
 
-      setTopArtistsShortTerm(topArtistsShortTerm)
-      setTopArtistsMediumTerm(topArtistsMediumTerm)
-
-      setArtists(topArtistsShortTerm);
-
+      setTopArtistsShortTerm(topArtistsShortTerm);
+      setTopArtistsMediumTerm(topArtistsMediumTerm);
+      setTopArtistsLongTerm(topArtistsLongTerm);
+      setCurrentArtists(topArtistsShortTerm);
     };
     apiCall();
   }, []);
 
-  const handleClick = (e) => {
-    e.preventDefault()
-    if (timeRange === "short_term") {
-      setTimeRange("medium_term");
-      setInnerText("six months");
-      setArtists(topArtistsMediumTerm)
-    } else {
-      setTimeRange("short_term");
-      setInnerText("four weeks");
-      setArtists(topArtistsShortTerm)
+  const handleChange = (e) => {
+    switch (e.target.value) {
+      case "six months":
+        setSelectValue(e.target.value);
+        setCurrentArtists(topArtistsMediumTerm);
+        break;
+      case "several years":
+        setSelectValue(e.target.value);
+        setCurrentArtists(topArtistsLongTerm);
+        break;
+      default:
+        setSelectValue(e.target.value);
+        setCurrentArtists(topArtistsShortTerm);
     }
-
   };
 
   return (
@@ -54,12 +76,23 @@ function App() {
       {accessToken ? (
         <>
           <Header
-            timeRange={timeRange}
-            obscurityRating={obscurityRating}
-            innerText={innerText}
-            handleClick={handleClick}
+            mostObscureArtist={mostObscureArtist}
+            nicheScore={nicheScore}
+            scoreDescriptor={scoreDescriptor}
+            mostObscureArtist={mostObscureArtist}
+            selectValue={selectValue}
+            handleChange={handleChange}
           />
-          <Main artists={artists} />
+          <Genres genres={genres} />
+          <GradientSlider
+            currentArtists={currentArtists}
+            groupedArtists={groupedArtists}
+            mostObscureArtist={mostObscureArtist}
+            green={green}
+            yellow={yellow}
+            orange={orange}
+            red={red}
+          />
         </>
       ) : (
         <>
@@ -69,5 +102,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

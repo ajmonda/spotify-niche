@@ -4,13 +4,14 @@ header {
   font-size: 20px;
   font-family: "Comfortaa";
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-content: center;
-  flex-wrap: wrap;
-  padding: 0;
   color: #f4c87b;
-  position: absolute;
-  padding: 0 20vw;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
 }
 
 .timeWrapper span:hover {
