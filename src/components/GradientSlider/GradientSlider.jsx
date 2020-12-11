@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Slider from "rc-slider";
 
-import ArtistsGrid from "../ArtistsGrid/ArtistsGrid";
+// import ArtistsGrid from "../ArtistsGrid/ArtistsGrid";
 
 import "./gradient-slider.css";
 import "rc-slider/assets/index.css";
 
 export default function GradientSlider(props) {
-  const { displayedArtists, onSliderChange, sliderValue } = props;
+  const { onSliderChange, sliderValue } = props;
 
   const gradient = `#56203D,
     #483A58 25%,
@@ -48,7 +48,7 @@ export default function GradientSlider(props) {
         </label>
       </div>
 
-      <ArtistsGrid displayedArtists={displayedArtists} />
+      {/* <ArtistsGrid displayedArtists={displayedArtists} /> */}
     </>
   );
 }

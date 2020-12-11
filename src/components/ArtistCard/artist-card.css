@@ -1,9 +1,18 @@
+
 .artistCard {
-  display: flex;
+  display: hidden;
   width: 100px;
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
+}
+
+.artistCard p, a {
+  color: white;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 10px;
+  text-decoration: none;
 }
 
 .artistCard img {
