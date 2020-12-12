@@ -29,7 +29,7 @@ function App() {
   const [topTracksLongTerm, setTopTracksLongTerm] = useState([]);
   const [selectValue, setSelectValue] = useState("short_term");
   const [displayedArtists, setDisplayedArtists] = useState([]);
-  const [sliderValue, setSliderValue] = useState(50);
+  const [sliderValue, setSliderValue] = useState(0);
 
   const urlString = queryString.parse(window.location.search);
   const accessToken = urlString.access_token;
@@ -37,8 +37,7 @@ function App() {
   const genres = getTopGenres(currentArtists).slice(0, 20).sort();
   const nicheScore = getNicheScore(currentArtists);
   const scoreDescriptor = getScoreDescriptor(nicheScore);
-  const groupedArtists = groupArtistsByPopularity(currentArtists);
-  const groupKeys = Object.keys(groupedArtists);
+  const groupedArtists = groupArtistsByPopularity(currentArtists).filter(group => group.length);
 
   useEffect(() => {
     const apiCall = async () => {
@@ -90,46 +89,17 @@ function App() {
     }
   };
 
-  console.log(groupKeys.pop());
-  console.log(sliderValue);
-
   const onSliderChange = (value) => {
     setSliderValue(value);
-    if (value > groupKeys.pop() || value < groupKeys[0]) {
 
-      return false;
-    } else if (value > 85) {
-      setDisplayedArtists(
-        currentArtists.filter((artist) => artist.popularity >= value)
-      );
-    } else if (value > 75) {
-      setDisplayedArtists(
-        currentArtists.filter(
-          (artist) => artist.popularity >= value && artist.popularity < 85
-        )
-      );
-    } else if (value > 50) {
-      setDisplayedArtists(
-        currentArtists.filter(
-          (artist) => artist.popularity >= value && artist.popularity < 75
-        )
-      );
-    } else if (value < 50 && value >= 25) {
-      setDisplayedArtists(
-        currentArtists.filter(
-          (artist) => artist.popularity < value && artist.popularity > 25
-        )
-      );
-    } else if (value < 25) {
-      setDisplayedArtists(
-        currentArtists.filter((artist) => artist.popularity < 25)
-      );
-    } else if (value < 15) {
-      setDisplayedArtists(
-        currentArtists.filter((artist) => artist.popuplarity <= 15)
-      );
-    }
+    groupedArtists.map((group, i) => {
+      if (value === i) {
+        setDisplayedArtists(group);
+      }
+    });
   };
+
+  console.log(groupedArtists)
 
   return (
     <div className="App">
@@ -145,6 +115,7 @@ function App() {
           <GradientSlider
             currentArtists={currentArtists}
             displayedArtists={displayedArtists}
+            groupedArtists={groupedArtists}
             sliderValue={sliderValue}
             onSliderChange={onSliderChange}
           />

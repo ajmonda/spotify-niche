@@ -15,7 +15,7 @@ export const getTopArtists = async (accessToken, timeRange) => {
       }
     );
     const topArtists = response.data.items;
-    sortByPopularity(topArtists);
+    sortByPopularity(topArtists)
     return topArtists;
   } catch (error) {
     throw error;
@@ -94,5 +94,8 @@ export const groupArtistsByPopularity = (topArtists) => {
     accumulator[value.popularity].push(value);
     return accumulator;
   }, []);
+  groupedArtists.filter(
+    (group) => group.length
+  );
   return groupedArtists
 };

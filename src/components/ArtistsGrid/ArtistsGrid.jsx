@@ -5,10 +5,7 @@ import ArtistCard from "../ArtistCard/ArtistCard";
 import "./artists-grid.css";
 
 export default function ArtistsGrid(props) {
-  const { currentArtists, displayedArtists } = props;
-
-  console.log(currentArtists);
-  console.log(displayedArtists);
+  const { displayedArtists } = props;
 
   return (
     <div className="artistsGridContainer">
