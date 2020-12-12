@@ -31,4 +31,8 @@ main p {
   .artistsGrid p {
     font-size: 15px;
   }
+  .artistsGrid img {
+    width: 100px;
+    height: 100px;
+  }
 }

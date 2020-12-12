@@ -10,11 +10,7 @@ export default function ArtistsGrid(props) {
   return (
     <div className="artistsGridContainer">
       <div className="artistsGrid">
-        <p style={{
-          width: '100%',
-          textAlign: 'center',
-        margin: '0 auto 30px auto'}}>Move the slider to explore your top artists.</p>
-        {displayedArtists
+        {displayedArtists.length
           ? displayedArtists.map((artist, i) => {
               return (
                 <a href={artist.external_urls["spotify"]} target="_blank">
@@ -22,7 +18,7 @@ export default function ArtistsGrid(props) {
                 </a>
               );
             })
-          : null}
+          : <p>Move the slider to explore your top artists.</p>}
       </div>
     </div>
   );
