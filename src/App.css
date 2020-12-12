@@ -1,14 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap");
 
 .App {
-height: 100%;
-padding: 2vh 3vw;
-font-family: 'Comfortaa';
-color: white;
-display: flex;
-flex-direction: column;
-justify-content: center;
+  padding: 0;
+  font-family: "Comfortaa";
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+.container {
+  padding: 0 5vw;
+}
+
 h5 {
   margin: 0;
   font-size: 15px;
@@ -17,4 +21,14 @@ h5 {
 main p {
   margin: 5px 10px;
   flex-shrink: 5;
+}
+
+@media only screen and (min-width: 500px) {
+  .App {
+    padding: 0 20vw;
+    margin: 0;
+  }
+  .artistsGrid p {
+    font-size: 15px;
+  }
 }

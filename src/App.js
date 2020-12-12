@@ -29,7 +29,7 @@ function App() {
   const [topTracksLongTerm, setTopTracksLongTerm] = useState([]);
   const [selectValue, setSelectValue] = useState("short_term");
   const [displayedArtists, setDisplayedArtists] = useState([]);
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(5);
 
   const urlString = queryString.parse(window.location.search);
   const accessToken = urlString.access_token;
@@ -37,7 +37,9 @@ function App() {
   const genres = getTopGenres(currentArtists).slice(0, 20).sort();
   const nicheScore = getNicheScore(currentArtists);
   const scoreDescriptor = getScoreDescriptor(nicheScore);
-  const groupedArtists = groupArtistsByPopularity(currentArtists).filter(group => group.length);
+  const groupedArtists = groupArtistsByPopularity(currentArtists).filter(
+    (group) => group.length
+  );
 
   useEffect(() => {
     const apiCall = async () => {
@@ -75,7 +77,7 @@ function App() {
 
   const handleChange = (e) => {
     setSelectValue(e.target.value);
-    setSliderValue(50);
+    setSliderValue(5);
     setDisplayedArtists([]);
     switch (e.target.value) {
       case "medium_term":
@@ -99,31 +101,43 @@ function App() {
     });
   };
 
-  console.log(groupedArtists)
+  console.log(groupedArtists);
 
   return (
     <div className="App">
       {accessToken ? (
-        <>
-          <Header
-            nicheScore={nicheScore}
-            scoreDescriptor={scoreDescriptor}
-            selectValue={selectValue}
-            handleChange={handleChange}
-          />
-          <Genres genres={genres} />
-          <GradientSlider
-            currentArtists={currentArtists}
-            displayedArtists={displayedArtists}
-            groupedArtists={groupedArtists}
-            sliderValue={sliderValue}
-            onSliderChange={onSliderChange}
-          />
-          <ArtistsGrid
-            currentArtists={currentArtists}
-            displayedArtists={displayedArtists}
-          />
-        </>
+        currentArtists.length ? (
+          <>
+          <div className="container">
+            <Header
+              nicheScore={nicheScore}
+              scoreDescriptor={scoreDescriptor}
+              selectValue={selectValue}
+              handleChange={handleChange}
+            />
+            <Genres genres={genres} />
+            <GradientSlider
+              currentArtists={currentArtists}
+              displayedArtists={displayedArtists}
+              groupedArtists={groupedArtists}
+              sliderValue={sliderValue}
+              onSliderChange={onSliderChange}
+            />
+            </div>
+            <ArtistsGrid
+              currentArtists={currentArtists}
+              displayedArtists={displayedArtists}
+            />
+          </>
+        ) : (
+          <p
+            style={{
+                textAlign: "center"
+            }}
+          >
+            Analyzing...
+          </p>
+        )
       ) : (
         <>
           <Login />
