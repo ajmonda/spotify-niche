@@ -12,7 +12,7 @@ export default function Genres(props) {
               key={i}
               style={{
                 fontSize:
-                  genre[1] > 3 ? `${genre[1] + 15}px` : `${genre[1] + 10}px`,
+                  genre[1] > 3 ? `${genre[1] + 12}px` : `${genre[1] + 9}px`,
                 fontWeight: genre[1] > 5 ? "bold" : "200",
                 color: genre[1] > 10 ? "white" : null,
                 alignSelf: "center",
