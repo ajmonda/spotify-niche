@@ -96,6 +96,7 @@ function App() {
   const onSliderChange = (value) => {
     setSliderValue(value);
     if (value > groupKeys.pop() || value < groupKeys[0]) {
+
       return false;
     } else if (value > 85) {
       setDisplayedArtists(
@@ -122,6 +123,10 @@ function App() {
     } else if (value < 25) {
       setDisplayedArtists(
         currentArtists.filter((artist) => artist.popularity < 25)
+      );
+    } else if (value < 15) {
+      setDisplayedArtists(
+        currentArtists.filter((artist) => artist.popuplarity <= 15)
       );
     }
   };
