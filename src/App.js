@@ -30,7 +30,7 @@ function App() {
   const [topTracksMediumTerm, setTopTracksMediumTerm] = useState([]);
   const [topTracksLongTerm, setTopTracksLongTerm] = useState([]);
 
-  const [selectValue, setSelectValue] = useState("short term");
+  const [selectValue, setSelectValue] = useState("short_term");
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [sliderValue, setSliderValue] = useState(5);
 
