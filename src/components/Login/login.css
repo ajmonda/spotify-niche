@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100vh;
   background-color: black;
 }
 .login {
@@ -55,5 +56,4 @@
   margin: 20px 0;
   font-family: "Montserrat";
   color: white;
-  text-align: justify;
 }
