@@ -3,11 +3,12 @@ import queryString from "query-string";
 
 import Header from "./components/Header/Header";
 import Genres from "./components/Genres/Genres";
+import DeepCuts from './components/DeepCuts/DeepCuts'
 import GradientSlider from "./components/GradientSlider/GradientSlider";
 import ArtistsGrid from "./components/ArtistsGrid/ArtistsGrid";
 import Login from "./components/Login/Login";
 
-import { getTopArtists } from "./services/services";
+import { getTopArtists, getTopTracks } from "./services/services";
 import {
   getNicheScore,
   getScoreDescriptor,
@@ -19,9 +20,16 @@ import "./App.css";
 
 function App() {
   const [currentArtists, setCurrentArtists] = useState([]);
+  const [currentTracks, setCurrentTracks] = useState([])
+
   const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([]);
   const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([]);
   const [topArtistsLongTerm, setTopArtistsLongTerm] = useState([]);
+
+  const [topTracksShortTerm, setTopTracksShortTerm] = useState([]);
+  const [topTracksMediumTerm, setTopTracksMediumTerm] = useState([]);
+  const [topTracksLongTerm, setTopTracksLongTerm] = useState([]);
+
   const [selectValue, setSelectValue] = useState("short_term");
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [sliderValue, setSliderValue] = useState(5);
@@ -36,6 +44,7 @@ function App() {
     (group) => group.length
   );
 
+
   useEffect(() => {
     const apiCall = async () => {
       const topArtistsShortTerm = await getTopArtists(
@@ -48,11 +57,26 @@ function App() {
       );
       const topArtistsLongTerm = await getTopArtists(accessToken, "long_term");
 
+      const topTracksShortTerm = await getTopTracks(
+        accessToken,
+        "short_term"
+      );
+      const topTracksMediumTerm = await getTopTracks(
+        accessToken,
+        "medium_term"
+      );
+      const topTracksLongTerm = await getTopTracks(accessToken, "long_term");
+
       setTopArtistsShortTerm(topArtistsShortTerm);
       setTopArtistsMediumTerm(topArtistsMediumTerm);
       setTopArtistsLongTerm(topArtistsLongTerm);
 
+      setTopTracksShortTerm(topTracksShortTerm);
+      setTopTracksMediumTerm(topTracksMediumTerm);
+      setTopTracksLongTerm(topTracksLongTerm);
+
       setCurrentArtists(topArtistsShortTerm);
+      setCurrentTracks(topTracksShortTerm)
     };
     apiCall();
   }, []);
@@ -64,12 +88,15 @@ function App() {
     switch (e.target.value) {
       case "medium_term":
         setCurrentArtists(topArtistsMediumTerm);
+        setCurrentTracks(topTracksMediumTerm)
         break;
       case "long_term":
         setCurrentArtists(topArtistsLongTerm);
+        setCurrentTracks(topTracksLongTerm)
         break;
       default:
         setCurrentArtists(topArtistsShortTerm);
+        setCurrentTracks(topTracksShortTerm)
     }
   };
 
@@ -94,6 +121,8 @@ function App() {
                 selectValue={selectValue}
                 handleChange={handleChange}
               />
+              <DeepCuts
+                currentTracks={currentTracks} />
               <Genres genres={genres} />
               <GradientSlider
                 currentArtists={currentArtists}
