@@ -89,11 +89,11 @@ function App() {
     setSliderValue(5);
     setDisplayedArtists([]);
     switch (e.target.value) {
-      case "medium term":
+      case "medium_term":
         setCurrentArtists(topArtistsMediumTerm);
         setCurrentTracks(topTracksMediumTerm)
         break;
-      case "long term":
+      case "long_term":
         setCurrentArtists(topArtistsLongTerm);
         setCurrentTracks(topTracksLongTerm)
         break;
