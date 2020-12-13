@@ -1,5 +1,8 @@
 .artistsGridContainer {
+  margin-top: 30px;
   min-height: 100vh;
+  min-width: 100vw;
+  margin-left: -20vw;
 
   background: hsla(326, 20%, 27%, 1);
 
@@ -33,6 +36,7 @@
   font-size: 10px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 15px;
+  justify-content: center;
+  align-content: space-evenly;
+  padding-left: 20vw;
 }

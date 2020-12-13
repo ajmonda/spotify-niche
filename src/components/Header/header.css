@@ -22,7 +22,6 @@ header h4 {
   color: #D9B8C4;
   margin: 0;
 }
-
 header select {
   padding: 2px;
   font-size: 12px;
@@ -30,7 +29,6 @@ header select {
   font-weight: bold;
   font-family: 'Roboto';
 }
-
 .score {
   display: flex;
   flex-direction: row;
@@ -38,7 +36,6 @@ header select {
   justify-content: center;
   text-align: center;
 }
-
 .timeSelect label {
   font-size: 15px;
 }

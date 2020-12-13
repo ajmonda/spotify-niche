@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
+  margin: 12px 5px;
 }
 
 .artistCard p, a {
@@ -16,8 +17,8 @@
 }
 
 .artistCard img {
-  width: 90px;
-  height: 90px;
+  width: 75px;
+  height: 75px;
   align-self: center;
   object-fit: cover;
 }

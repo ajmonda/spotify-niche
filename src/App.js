@@ -7,26 +7,21 @@ import GradientSlider from "./components/GradientSlider/GradientSlider";
 import ArtistsGrid from "./components/ArtistsGrid/ArtistsGrid";
 import Login from "./components/Login/Login";
 
+import { getTopArtists } from "./services/services";
 import {
-  getTopArtists,
   getNicheScore,
   getScoreDescriptor,
   getTopGenres,
-  getTopTracks,
   groupArtistsByPopularity,
-} from "./services";
+} from "./utilities/utils";
 
 import "./App.css";
 
 function App() {
   const [currentArtists, setCurrentArtists] = useState([]);
-  const [currentTracks, setCurrentTracks] = useState([]);
   const [topArtistsShortTerm, setTopArtistsShortTerm] = useState([]);
-  const [topTracksShortTerm, setTopTracksShortTerm] = useState([]);
   const [topArtistsMediumTerm, setTopArtistsMediumTerm] = useState([]);
-  const [topTracksMediumTerm, setTopTracksMediumTerm] = useState([]);
   const [topArtistsLongTerm, setTopArtistsLongTerm] = useState([]);
-  const [topTracksLongTerm, setTopTracksLongTerm] = useState([]);
   const [selectValue, setSelectValue] = useState("short_term");
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [sliderValue, setSliderValue] = useState(5);
@@ -47,30 +42,17 @@ function App() {
         accessToken,
         "short_term"
       );
-      const topTracksShortTerm = await getTopTracks(accessToken, "short_term");
-
       const topArtistsMediumTerm = await getTopArtists(
         accessToken,
         "medium_term"
       );
-      const topTracksMediumTerm = await getTopTracks(
-        accessToken,
-        "medium_term"
-      );
-
       const topArtistsLongTerm = await getTopArtists(accessToken, "long_term");
-      const topTracksLongTerm = await getTopTracks(accessToken, "long_term");
 
       setTopArtistsShortTerm(topArtistsShortTerm);
       setTopArtistsMediumTerm(topArtistsMediumTerm);
       setTopArtistsLongTerm(topArtistsLongTerm);
 
-      setTopTracksShortTerm(topTracksShortTerm);
-      setTopTracksMediumTerm(topTracksMediumTerm);
-      setTopTracksLongTerm(topTracksLongTerm);
-
       setCurrentArtists(topArtistsShortTerm);
-      setCurrentTracks(topTracksShortTerm);
     };
     apiCall();
   }, []);
@@ -100,29 +82,26 @@ function App() {
       }
     });
   };
-
-  console.log(groupedArtists);
-
   return (
     <div className="App">
       {accessToken ? (
         currentArtists.length ? (
           <>
-          <div className="container">
-            <Header
-              nicheScore={nicheScore}
-              scoreDescriptor={scoreDescriptor}
-              selectValue={selectValue}
-              handleChange={handleChange}
-            />
-            <Genres genres={genres} />
-            <GradientSlider
-              currentArtists={currentArtists}
-              displayedArtists={displayedArtists}
-              groupedArtists={groupedArtists}
-              sliderValue={sliderValue}
-              onSliderChange={onSliderChange}
-            />
+            <div className="container">
+              <Header
+                nicheScore={nicheScore}
+                scoreDescriptor={scoreDescriptor}
+                selectValue={selectValue}
+                handleChange={handleChange}
+              />
+              <Genres genres={genres} />
+              <GradientSlider
+                currentArtists={currentArtists}
+                displayedArtists={displayedArtists}
+                groupedArtists={groupedArtists}
+                sliderValue={sliderValue}
+                onSliderChange={onSliderChange}
+              />
             </div>
             <ArtistsGrid
               currentArtists={currentArtists}
@@ -132,7 +111,8 @@ function App() {
         ) : (
           <p
             style={{
-                textAlign: "center"
+              textAlign: "center",
+              margin: "100px",
             }}
           >
             Analyzing...

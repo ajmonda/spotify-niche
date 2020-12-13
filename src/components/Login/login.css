@@ -1,7 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
-
 .loginContainer {
   display: flex;
   flex-direction: column;
@@ -15,30 +11,27 @@
   justify-content: center;
   box-sizing: border-box;
   background-color: black;
-  padding: 30px;
   height: 70vh;
-  width: 100vw;
 }
 .login h1 {
+  text-align: center;
   margin-top: 0;
   font-size: 50px;
   font-family: "Comfortaa";
   color: white;
 }
-
 span {
   align-self: baseline;
   font-size: 60px;
-  color: #F9564F;
+  color: #483A58;
+  text-shadow: 1px 1px #56638A;
 }
-
 .loginButton {
   display: flex;
   flex-direction: column;
   align-self: center;
   width: 300px;
 }
-
 .login button {
   padding: 15px 20px;
   font-family: "Montserrat";
@@ -52,15 +45,12 @@ span {
   border-style: none;
   border-radius: 5px;
 }
-
 .login button img {
   padding-left: 35px;
 }
-
 .login button:hover {
   cursor: pointer;
 }
-
 .login label {
   font-weight: bold;
   margin: 20px 0;
