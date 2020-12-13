@@ -7,14 +7,13 @@ import GradientSlider from "./components/GradientSlider/GradientSlider";
 import ArtistsGrid from "./components/ArtistsGrid/ArtistsGrid";
 import Login from "./components/Login/Login";
 
+import { getTopArtists, getTopTracks } from "./services/services";
 import {
-  getTopArtists,
   getNicheScore,
   getScoreDescriptor,
   getTopGenres,
-  getTopTracks,
   groupArtistsByPopularity,
-} from "./services";
+} from "./utilities/utils";
 
 import "./App.css";
 
@@ -108,21 +107,21 @@ function App() {
       {accessToken ? (
         currentArtists.length ? (
           <>
-          <div className="container">
-            <Header
-              nicheScore={nicheScore}
-              scoreDescriptor={scoreDescriptor}
-              selectValue={selectValue}
-              handleChange={handleChange}
-            />
-            <Genres genres={genres} />
-            <GradientSlider
-              currentArtists={currentArtists}
-              displayedArtists={displayedArtists}
-              groupedArtists={groupedArtists}
-              sliderValue={sliderValue}
-              onSliderChange={onSliderChange}
-            />
+            <div className="container">
+              <Header
+                nicheScore={nicheScore}
+                scoreDescriptor={scoreDescriptor}
+                selectValue={selectValue}
+                handleChange={handleChange}
+              />
+              <Genres genres={genres} />
+              <GradientSlider
+                currentArtists={currentArtists}
+                displayedArtists={displayedArtists}
+                groupedArtists={groupedArtists}
+                sliderValue={sliderValue}
+                onSliderChange={onSliderChange}
+              />
             </div>
             <ArtistsGrid
               currentArtists={currentArtists}
@@ -132,7 +131,7 @@ function App() {
         ) : (
           <p
             style={{
-                textAlign: "center"
+              textAlign: "center",
             }}
           >
             Analyzing...
