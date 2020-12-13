@@ -10,7 +10,7 @@
 }
 
 .container {
-  padding: 0 5vw;
+  padding: 0 30px;
 }
 
 h5 {
@@ -28,11 +28,18 @@ main p {
     padding: 0 20vw;
     margin: 0;
   }
-  .artistsGrid p {
+  .artistsGridContainer {
     font-size: 15px;
   }
-  .artistsGrid img {
+  .artistsGrid {
+    margin: 0 22vw;
+    padding: 0;
+  }
+  .artistCard img {
     width: 100px;
     height: 100px;
+  }
+  .artistCard {
+    margin: 20px;
   }
 }
