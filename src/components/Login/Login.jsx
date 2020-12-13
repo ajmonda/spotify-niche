@@ -22,7 +22,7 @@ export default function Login() {
             alt="Spotify logo"
           />
         </button>
-        <label>Login with Spotify</label>
+        <label>This app analyzes the obscurity of your Spotify listening habits. After connecting your Spotify, you will be given a score based on the average popularity of your top artists. You will also be shown a text graph of your most frequent genres, and be able to explore your favorite artists based on their popularity ratings.</label>
       </div>
       </div>
       </div>

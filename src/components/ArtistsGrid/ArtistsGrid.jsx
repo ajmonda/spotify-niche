@@ -13,7 +13,7 @@ export default function ArtistsGrid(props) {
         {displayedArtists.length
           ? displayedArtists.map((artist, i) => {
               return (
-                <a href={artist.external_urls["spotify"]} target="_blank">
+                <a href={artist.external_urls["spotify"]} target="_blank" rel="noreferrer" key={i}>
                   <ArtistCard key={i} artist={artist} />
                 </a>
               );

@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
 
 .App {
   padding: 0;
@@ -8,11 +11,9 @@
   flex-direction: column;
   justify-content: center;
 }
-
 .container {
   padding: 0 30px;
 }
-
 h5 {
   margin: 0;
   font-size: 15px;
@@ -22,7 +23,6 @@ main p {
   margin: 5px 10px;
   flex-shrink: 5;
 }
-
 @media only screen and (min-width: 500px) {
   .App {
     padding: 0 20vw;

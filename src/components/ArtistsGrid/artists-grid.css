@@ -37,5 +37,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: space-evenly;
   padding-left: 20vw;
 }
