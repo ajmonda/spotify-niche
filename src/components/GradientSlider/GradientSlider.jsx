@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+
+// https://github.com/react-component/slider/
 import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 
 import "./gradient-slider.css";
-import "rc-slider/assets/index.css";
 
 export default function GradientSlider(props) {
   const { groupedArtists, onSliderChange, sliderValue } = props;
@@ -16,6 +18,7 @@ export default function GradientSlider(props) {
     <div className="gradientSlider">
       <Slider
         reverse={true}
+        // value steps span length of artist array
         min={0}
         max={groupedArtists.length}
         value={sliderValue}

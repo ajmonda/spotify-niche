@@ -5,6 +5,7 @@ import "./header.css";
 export default function Header(props) {
   const { nicheScore, scoreDescriptor, selectValue, handleChange } = props;
 
+  // colors reflect slider gradient
   const scoreColor = (scoreDescriptor) => {
     let scoreColor;
     switch (scoreDescriptor) {

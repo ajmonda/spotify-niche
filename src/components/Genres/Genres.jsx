@@ -12,6 +12,7 @@ export default function Genres(props) {
               key={i}
               style={{
                 fontSize:
+                  // frequency of genre in user data increases font size, affects styling
                   genre[1] > 3 ? `${genre[1] + 12}px` : `${genre[1] + 9}px`,
                 fontWeight: genre[1] > 5 ? "bold" : "200",
                 color: genre[1] > 10 ? "white" : null,

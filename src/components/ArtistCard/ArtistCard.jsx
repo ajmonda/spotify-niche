@@ -3,10 +3,9 @@ import React from "react";
 import "./artist-card.css";
 
 export default function ArtistCard(props) {
-  const { artist, style } = props;
+  const { artist } = props;
   return (
-    <div className="artistCard"
-      style={style}>
+    <div className="artistCard">
       <img
         src={
           artist.images[0]

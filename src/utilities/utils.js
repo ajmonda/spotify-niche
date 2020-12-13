@@ -2,6 +2,7 @@ export const sortByPopularity = (data) => {
   data.sort((a, b) => parseFloat(a.popularity) - parseFloat(b.popularity));
 };
 
+// remainder of average artist popularity
 export const getNicheScore = (artists) => {
   let sum = 0;
   artists.map((artist) => {
@@ -24,6 +25,7 @@ export const getScoreDescriptor = (nicheScore) => {
   }
 };
 
+// group and order genre names by highest frequency in top artist array
 export const getTopGenres = (topArtists) => {
   const genres = [];
   topArtists.map((artist) => {
@@ -41,6 +43,7 @@ export const getTopGenres = (topArtists) => {
   return Object.entries(genreFrequencies).sort((a, b) => b[1] - a[1]);
 };
 
+// determine range for slider
 export const groupArtistsByPopularity = (topArtists) => {
   const groupedArtists = topArtists.reduce((accumulator, value) => {
     if (!accumulator[value.popularity]) {

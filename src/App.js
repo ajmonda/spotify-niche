@@ -30,10 +30,11 @@ function App() {
   const [topTracksMediumTerm, setTopTracksMediumTerm] = useState([]);
   const [topTracksLongTerm, setTopTracksLongTerm] = useState([]);
 
-  const [selectValue, setSelectValue] = useState("short_term");
+  const [selectValue, setSelectValue] = useState("short term");
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [sliderValue, setSliderValue] = useState(5);
 
+  // https://github.com/mpj/oauth-bridge-template
   const urlString = queryString.parse(window.location.search);
   const accessToken = urlString.access_token;
 
@@ -47,6 +48,7 @@ function App() {
 
   useEffect(() => {
     const apiCall = async () => {
+
       const topArtistsShortTerm = await getTopArtists(
         accessToken,
         "short_term"
@@ -81,16 +83,17 @@ function App() {
     apiCall();
   }, []);
 
+  // user data select
   const handleChange = (e) => {
     setSelectValue(e.target.value);
     setSliderValue(5);
     setDisplayedArtists([]);
     switch (e.target.value) {
-      case "medium_term":
+      case "medium term":
         setCurrentArtists(topArtistsMediumTerm);
         setCurrentTracks(topTracksMediumTerm)
         break;
-      case "long_term":
+      case "long term":
         setCurrentArtists(topArtistsLongTerm);
         setCurrentTracks(topTracksLongTerm)
         break;
@@ -100,6 +103,8 @@ function App() {
     }
   };
 
+  // artists to be displayed based on slider position
+  // artist ordered, grouped by popularity; array index = slider value
   const onSliderChange = (value) => {
     setSliderValue(value);
 

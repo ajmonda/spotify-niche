@@ -4,14 +4,19 @@ import "./deep-cuts.css";
 
 export default function DeepCuts(props) {
   const { currentTracks } = props;
-  const deepCuts = currentTracks.slice(0, 5);
+
+  // top tracks ordered by popularity
+  // 15 least popular tracks, excluding singles
+  const deepCuts = currentTracks
+    .filter((track) => track.album.type !== "SINGLE")
+    .slice(0, 15);
 
   return (
     <div className="deep-cuts">
       <h4>Deep Cuts:</h4>
-      {deepCuts.map((song) => {
+      {deepCuts.map((song, i) => {
         return (
-          <div className="song">
+          <div className="song" key={i}>
             <h5 style={{ color: "#63A088" }}>{song.artists[0].name}</h5>
             <h5>{song.name}</h5>
           </div>

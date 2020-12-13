@@ -23,7 +23,7 @@ main p {
   margin: 5px 10px;
   flex-shrink: 5;
 }
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 600px) {
   .App {
     padding: 0 20vw;
     margin: 0;
@@ -42,4 +42,15 @@ main p {
   .artistCard {
     margin: 20px;
   }
+}
+
+@media only screen and (min-width: 1024px) {
+  .App {
+    padding: 0 30vw;
+    margin: 0;
+  }
+.artistsGridContainer {
+  margin-left: -30vw;
+  width: 100%;
+}
 }
