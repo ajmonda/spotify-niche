@@ -6,10 +6,10 @@ export default function DeepCuts(props) {
   const { currentTracks } = props;
 
   // top tracks ordered by popularity
-  // 15 least popular tracks, excluding singles
+  // 5 least popular tracks, excluding singles
   const deepCuts = currentTracks
     .filter((track) => track.album.type !== "SINGLE")
-    .slice(0, 15);
+    .slice(0, 5);
 
   return (
     <div className="deep-cuts">
